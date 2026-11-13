@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "run_id": "ma-mxp-baseline",
+  "phase_id": "baseline",
+  "root_seed": 2026101100,
+  "reserved_manifest": "reserved-mxp-v1.json",
+  "reserved_conditions": "conditions-mxp-v2.json",
+  "topology": {
+    "phase_slot": 0,
+    "env_runners": 4,
+    "envs_per_runner": 1
+  },
+  "scenario": {
+    "airport": "MXP",
+    "difficulty": "VALIDATION_USE_CASE_1",
+    "aircraft_count": 10,
+    "config_root": "../simulation_config_mxp",
+    "config_sha256": "bf78d4f64a90a5be405210a432bcf3f8959697a75f5edd1cbd943fb1754a5fb3",
+    "episode_steps": 128,
+    "start_offset_max_s": 45,
+    "verification": "native_generation",
+    "noop_verification_max_seconds": 6000
+  },
+  "thresholds": {
+    "training_success_s": 30.0,
+    "operational_success_s": 60.0,
+    "lockout_s": 30.0,
+    "auto_solve_s": 60.0
+  },
+  "features": {
+    "deviation_encoding": "linear",
+    "neighbor_selection": "risk",
+    "linear_scale_s": 900.0,
+    "knee_s": 60.0,
+    "cap_s": 900.0,
+    "dimensions": {
+      "aircraft_scalar": 9,
+      "global_context": 12,
+      "waypoint": 8,
+      "neighbor": 16,
+      "max_waypoints": 20,
+      "max_neighbors": 5
+    },
+    "architecture": {
+      "mlp_hidden": 96,
+      "aircraft_scalar_hidden": 160,
+      "aircraft_scalar_out": 96,
+      "flight_plan_hidden": 192,
+      "conv1_channels": 48,
+      "conv2_channels": 96,
+      "neighbor_model": 128,
+      "neighbor_heads": 4,
+      "combined_hidden": 384,
+      "combined_out": 192,
+      "gru_hidden": 192,
+      "max_seq_len": 8,
+      "critic_context_out": 64
+    }
+  },
+  "reward": {
+    "max_for_zero_delay": 10.0,
+    "max_for_zero_infringement": 15.0,
+    "action_penalty_weight": 1.0,
+    "speed_penalty_weight": 1.0,
+    "global_share": 0.08,
+    "success_bonus": 3.0,
+    "success_margin_bonus_max": 1.0,
+    "delayed_clean_bonus": 1.0,
+    "realized_failure_cost": 3.0,
+    "count_scaling": "initial_count_over_baseline",
+    "coverage_accounting": "fixed_target_potential_v2",
+    "count_baseline": 3.0,
+    "action_damping_steps": 24,
+    "speed_damping_steps": 40
+  },
+  "optimizer": {
+    "learning_rate": 5e-05,
+    "gamma": 0.995,
+    "gae_lambda": 0.97,
+    "clip_param": 0.2,
+    "vf_clip_param": 30.0,
+    "vf_loss_coeff": 0.35,
+    "entropy_coeff": 0.01,
+    "grad_clip": 1.0,
+    "train_batch_size": 16384,
+    "minibatch_size": 2048,
+    "epochs": 2
+  },
+  "resources": {
+    "backend": "cuda",
+    "learner_device": "cuda",
+    "num_learners": 1,
+    "cpus_per_runner": 1.0,
+    "cpus_per_learner": 2.0,
+    "gpus_per_learner": 1.0
+  },
+  "cadences": {
+    "checkpoint_iterations": 10,
+    "evaluation_iterations": 10
+  },
+  "execution": {
+    "output_root": "../../runs"
+  }
+}

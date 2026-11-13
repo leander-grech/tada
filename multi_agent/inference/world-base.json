@@ -1,0 +1,562 @@
+{
+  "aircraft": [],
+  "airspace": {
+    "name": "Generated Airspace",
+    "boundaries_m": [
+      [-400000.0, -400000.0],
+      [400000.0, -400000.0],
+      [400000.0, 400000.0],
+      [-400000.0, 400000.0]
+    ],
+    "winds": [
+      {
+        "altitude_min": 0.0,
+        "altitude_max": 3048.0,
+        "velocity_m_s": [0.0, 0.0]
+      },
+      {
+        "altitude_min": 3048.0,
+        "altitude_max": 6096.0,
+        "velocity_m_s": [0.0, 0.0]
+      },
+      {
+        "altitude_min": 6096.0,
+        "altitude_max": 9144.0,
+        "velocity_m_s": [0.0, 0.0]
+      },
+      {
+        "altitude_min": 9144.0,
+        "altitude_max": 12192.0,
+        "velocity_m_s": [0.0, 0.0]
+      }
+    ],
+    "transition_alt_ft": 5000.0,
+    "transition_level_fl": 60.0,
+    "speedlimit_under_f100": 128.61111,
+    "qnh_hpa": 1013.25,
+    "prohibited_volumes_m": []
+  },
+  "waypoints": {
+    "ATMIP": {
+      "name": "ATMIP",
+      "position_m": [63559.78, -43446.55],
+      "waypoint_type": "FlyBy"
+    },
+    "ODAMO": {
+      "name": "ODAMO",
+      "position_m": [45245.66, 965.36],
+      "waypoint_type": "FlyBy"
+    },
+    "NOBMI": {
+      "name": "NOBMI",
+      "position_m": [95847.87, 23346.15],
+      "waypoint_type": "FlyBy"
+    },
+    "MC588": {
+      "name": "MC588",
+      "position_m": [-53904.47, -48694.0],
+      "waypoint_type": "FlyBy"
+    },
+    "MC680": {
+      "name": "MC680",
+      "position_m": [-34106.03, 28835.69],
+      "waypoint_type": "FlyBy"
+    },
+    "MC968": {
+      "name": "MC968",
+      "position_m": [-50775.1, 2974.01],
+      "waypoint_type": "FlyBy"
+    },
+    "PEXUG": {
+      "name": "PEXUG",
+      "position_m": [27362.48, 23950.17],
+      "waypoint_type": "FlyBy"
+    },
+    "ME561": {
+      "name": "ME561",
+      "position_m": [44740.3, 25350.47],
+      "waypoint_type": "FlyBy"
+    },
+    "ME761": {
+      "name": "ME761",
+      "position_m": [40339.68, 34601.73],
+      "waypoint_type": "FlyBy"
+    },
+    "MC556": {
+      "name": "MC556",
+      "position_m": [-46544.59, -18885.43],
+      "waypoint_type": "FlyBy"
+    },
+    "ME632": {
+      "name": "ME632",
+      "position_m": [44046.42, -13410.67],
+      "waypoint_type": "FlyBy"
+    },
+    "ME620": {
+      "name": "ME620",
+      "position_m": [66117.78, -11558.44],
+      "waypoint_type": "FlyBy"
+    },
+    "ME872": {
+      "name": "ME872",
+      "position_m": [6521.47, 42005.41],
+      "waypoint_type": "FlyBy"
+    },
+    "ME861": {
+      "name": "ME861",
+      "position_m": [24050.92, 31487.88],
+      "waypoint_type": "FlyBy"
+    },
+    "OSKOR": {
+      "name": "OSKOR",
+      "position_m": [65431.51, 23473.5],
+      "waypoint_type": "FlyBy"
+    },
+    "RIXUV": {
+      "name": "RIXUV",
+      "position_m": [-52280.23, 51114.13],
+      "waypoint_type": "FlyBy"
+    },
+    "INLER": {
+      "name": "INLER",
+      "position_m": [-37415.94, -7606.91],
+      "waypoint_type": "FlyBy"
+    },
+    "ME534": {
+      "name": "ME534",
+      "position_m": [19392.08, 29246.03],
+      "waypoint_type": "FlyBy"
+    },
+    "ME740": {
+      "name": "ME740",
+      "position_m": [38843.0, -26318.17],
+      "waypoint_type": "FlyBy"
+    },
+    "MC546": {
+      "name": "MC546",
+      "position_m": [-43047.66, -37103.48],
+      "waypoint_type": "FlyBy"
+    },
+    "ME865": {
+      "name": "ME865",
+      "position_m": [17688.85, 35318.2],
+      "waypoint_type": "FlyBy"
+    },
+    "MC561": {
+      "name": "MC561",
+      "position_m": [-48305.96, -9777.33],
+      "waypoint_type": "FlyBy"
+    },
+    "IBSAP": {
+      "name": "IBSAP",
+      "position_m": [-58505.55, -25047.33],
+      "waypoint_type": "FlyBy"
+    },
+    "NOSTA": {
+      "name": "NOSTA",
+      "position_m": [-119017.73, -180214.02],
+      "waypoint_type": "FlyBy"
+    },
+    "MC430": {
+      "name": "MC430",
+      "position_m": [-32199.06, -34994.28],
+      "waypoint_type": "FlyBy"
+    },
+    "TOP": {
+      "name": "TOP",
+      "position_m": [-110708.0, -57113.13],
+      "waypoint_type": "FlyBy"
+    },
+    "MC905": {
+      "name": "MC905",
+      "position_m": [-46110.21, 39347.66],
+      "waypoint_type": "FlyBy"
+    },
+    "OBFUL": {
+      "name": "OBFUL",
+      "position_m": [33615.26, 25715.47],
+      "waypoint_type": "FlyBy"
+    },
+    "MC746": {
+      "name": "MC746",
+      "position_m": [-21360.2, -32904.88],
+      "waypoint_type": "FlyBy"
+    },
+    "ME536": {
+      "name": "ME536",
+      "position_m": [37730.81, 24408.27],
+      "waypoint_type": "FlyBy"
+    },
+    "EKLIB": {
+      "name": "EKLIB",
+      "position_m": [52719.12, 50731.41],
+      "waypoint_type": "FlyBy"
+    },
+    "AKASU": {
+      "name": "AKASU",
+      "position_m": [-61195.95, 74738.57],
+      "waypoint_type": "FlyBy"
+    },
+    "MC583": {
+      "name": "MC583",
+      "position_m": [-55665.62, -39586.83],
+      "waypoint_type": "FlyBy"
+    },
+    "MC985": {
+      "name": "MC985",
+      "position_m": [-55713.36, 34116.57],
+      "waypoint_type": "FlyBy"
+    },
+    "MXP": {
+      "name": "MXP",
+      "position_m": [-43003.76, 18865.87],
+      "waypoint_type": "FlyOver"
+    },
+    "VAFRA": {
+      "name": "VAFRA",
+      "position_m": [-56050.26, 37346.02],
+      "waypoint_type": "FlyBy"
+    },
+    "MEBUR": {
+      "name": "MEBUR",
+      "position_m": [-8384.98, -75542.74],
+      "waypoint_type": "FlyBy"
+    },
+    "MC785": {
+      "name": "MC785",
+      "position_m": [-13829.94, 24063.18],
+      "waypoint_type": "FlyBy"
+    },
+    "ME531": {
+      "name": "ME531",
+      "position_m": [20863.37, 19267.17],
+      "waypoint_type": "FlyBy"
+    },
+    "ME533": {
+      "name": "ME533",
+      "position_m": [12560.48, 31032.71],
+      "waypoint_type": "FlyBy"
+    },
+    "ME628": {
+      "name": "ME628",
+      "position_m": [51465.76, -15468.23],
+      "waypoint_type": "FlyBy"
+    },
+    "IDONA": {
+      "name": "IDONA",
+      "position_m": [11858.54, -161784.4],
+      "waypoint_type": "FlyBy"
+    },
+    "ELTAR": {
+      "name": "ELTAR",
+      "position_m": [85528.92, -5925.98],
+      "waypoint_type": "FlyBy"
+    },
+    "MC425": {
+      "name": "MC425",
+      "position_m": [-33935.49, -25881.86],
+      "waypoint_type": "FlyBy"
+    },
+    "ME616": {
+      "name": "ME616",
+      "position_m": [71593.67, -6124.19],
+      "waypoint_type": "FlyBy"
+    },
+    "AVHEB": {
+      "name": "AVHEB",
+      "position_m": [52280.07, 15988.17],
+      "waypoint_type": "FlyBy"
+    },
+    "MC795": {
+      "name": "MC795",
+      "position_m": [5436.17, 23933.62],
+      "waypoint_type": "FlyBy"
+    },
+    "MC435": {
+      "name": "MC435",
+      "position_m": [-30467.62, -44107.33],
+      "waypoint_type": "FlyBy"
+    },
+    "ME732": {
+      "name": "ME732",
+      "position_m": [50770.15, -23176.79],
+      "waypoint_type": "FlyBy"
+    },
+    "ITVUN": {
+      "name": "ITVUN",
+      "position_m": [35329.62, -34897.55],
+      "waypoint_type": "FlyBy"
+    },
+    "OSBUL": {
+      "name": "OSBUL",
+      "position_m": [79225.55, -68587.72],
+      "waypoint_type": "FlyBy"
+    },
+    "MC420": {
+      "name": "MC420",
+      "position_m": [-35677.12, -16770.05],
+      "waypoint_type": "FlyBy"
+    },
+    "ME504": {
+      "name": "ME504",
+      "position_m": [60220.53, 18375.99],
+      "waypoint_type": "FlyBy"
+    },
+    "ME768": {
+      "name": "ME768",
+      "position_m": [48229.2, 44938.06],
+      "waypoint_type": "FlyBy"
+    },
+    "BGY": {
+      "name": "BGY",
+      "position_m": [34869.94, 25137.05],
+      "waypoint_type": "FlyOver"
+    },
+    "MXP_35L_APP00": {
+      "name": "MXP_35L_APP00",
+      "position_m": [-40708.832, 7993.4336],
+      "waypoint_type": "FlyOver"
+    },
+    "TZO": {
+      "name": "TZO",
+      "position_m": [17803.59, 13451.07],
+      "waypoint_type": "FlyBy"
+    },
+    "MC880": {
+      "name": "MC880",
+      "position_m": [-23113.12, 24104.31],
+      "waypoint_type": "FlyBy"
+    },
+    "LASAV": {
+      "name": "LASAV",
+      "position_m": [56836.88, 19295.31],
+      "waypoint_type": "FlyBy"
+    },
+    "MC768": {
+      "name": "MC768",
+      "position_m": [-28972.03, 7198.28],
+      "waypoint_type": "FlyBy"
+    },
+    "MC690": {
+      "name": "MC690",
+      "position_m": [-39512.32, 46591.15],
+      "waypoint_type": "FlyBy"
+    },
+    "ME532": {
+      "name": "ME532",
+      "position_m": [10213.92, 22055.72],
+      "waypoint_type": "FlyBy"
+    },
+    "TIXUM": {
+      "name": "TIXUM",
+      "position_m": [52975.81, 8045.95],
+      "waypoint_type": "FlyBy"
+    },
+    "DEVOX": {
+      "name": "DEVOX",
+      "position_m": [-41560.13, -82623.89],
+      "waypoint_type": "FlyBy"
+    },
+    "ESITE": {
+      "name": "ESITE",
+      "position_m": [-23095.76, -23748.23],
+      "waypoint_type": "FlyBy"
+    },
+    "MC756": {
+      "name": "MC756",
+      "position_m": [-24808.11, -14674.77],
+      "waypoint_type": "FlyBy"
+    },
+    "ORI": {
+      "name": "ORI",
+      "position_m": [43949.05, 22872.26],
+      "waypoint_type": "FlyBy"
+    },
+    "ME565": {
+      "name": "ME565",
+      "position_m": [52163.11, 25086.08],
+      "waypoint_type": "FlyBy"
+    },
+    "ASTIG": {
+      "name": "ASTIG",
+      "position_m": [-77230.03, -55288.72],
+      "waypoint_type": "FlyBy"
+    },
+    "ME760": {
+      "name": "ME760",
+      "position_m": [39221.62, 33133.24],
+      "waypoint_type": "FlyBy"
+    },
+    "BAPLU": {
+      "name": "BAPLU",
+      "position_m": [74126.76, -31535.03],
+      "waypoint_type": "FlyBy"
+    },
+    "EVRIP": {
+      "name": "EVRIP",
+      "position_m": [21533.82, 46138.14],
+      "waypoint_type": "FlyBy"
+    },
+    "AMOXI": {
+      "name": "AMOXI",
+      "position_m": [6868.16, -93601.21],
+      "waypoint_type": "FlyBy"
+    },
+    "ODINA": {
+      "name": "ODINA",
+      "position_m": [-47960.76, 74151.03],
+      "waypoint_type": "FlyBy"
+    },
+    "EGFOL": {
+      "name": "EGFOL",
+      "position_m": [-65935.08, 17094.89],
+      "waypoint_type": "FlyBy"
+    },
+    "MC568": {
+      "name": "MC568",
+      "position_m": [-60989.65, -12272.12],
+      "waypoint_type": "FlyBy"
+    },
+    "MC761": {
+      "name": "MC761",
+      "position_m": [-26539.55, -5560.48],
+      "waypoint_type": "FlyBy"
+    },
+    "ME765": {
+      "name": "ME765",
+      "position_m": [44844.23, 40508.78],
+      "waypoint_type": "FlyBy"
+    },
+    "EVGIR": {
+      "name": "EVGIR",
+      "position_m": [-32350.45, 21523.06],
+      "waypoint_type": "FlyBy"
+    },
+    "XELGA": {
+      "name": "XELGA",
+      "position_m": [-53298.31, 15770.19],
+      "waypoint_type": "FlyBy"
+    },
+    "ME503": {
+      "name": "ME503",
+      "position_m": [65689.05, 18988.87],
+      "waypoint_type": "FlyBy"
+    },
+    "KUPBE": {
+      "name": "KUPBE",
+      "position_m": [-52818.48, 20985.62],
+      "waypoint_type": "FlyBy"
+    },
+    "OGVON": {
+      "name": "OGVON",
+      "position_m": [40898.53, 11577.1],
+      "waypoint_type": "FlyBy"
+    },
+    "MXP_35L_APP01": {
+      "name": "MXP_35L_APP01",
+      "position_m": [-41856.297, 13429.651],
+      "waypoint_type": "FlyOver"
+    },
+    "BGY_10_APP00": {
+      "name": "BGY_10_APP00",
+      "position_m": [40303.844, 23978.678],
+      "waypoint_type": "FlyOver"
+    },
+    "ULSOP": {
+      "name": "ULSOP",
+      "position_m": [68849.41, 9550.43],
+      "waypoint_type": "FlyBy"
+    },
+    "DIXER": {
+      "name": "DIXER",
+      "position_m": [2941.01, -40075.13],
+      "waypoint_type": "FlyBy"
+    },
+    "MC685": {
+      "name": "MC685",
+      "position_m": [-40235.7, 36291.94],
+      "waypoint_type": "FlyBy"
+    },
+    "MC895": {
+      "name": "MC895",
+      "position_m": [1858.07, 36464.48],
+      "waypoint_type": "FlyBy"
+    },
+    "ME624": {
+      "name": "ME624",
+      "position_m": [59130.04, -14789.8],
+      "waypoint_type": "FlyBy"
+    },
+    "ULVUN": {
+      "name": "ULVUN",
+      "position_m": [74750.0, 3382.39],
+      "waypoint_type": "FlyBy"
+    },
+    "ME502": {
+      "name": "ME502",
+      "position_m": [86058.1, 21217.42],
+      "waypoint_type": "FlyBy"
+    },
+    "IKREZ": {
+      "name": "IKREZ",
+      "position_m": [-44836.37, -28015.48],
+      "waypoint_type": "FlyBy"
+    },
+    "MC741": {
+      "name": "MC741",
+      "position_m": [-19643.51, -42021.02],
+      "waypoint_type": "FlyBy"
+    },
+    "LUSIL": {
+      "name": "LUSIL",
+      "position_m": [65428.93, 67317.35],
+      "waypoint_type": "FlyBy"
+    },
+    "BONXE": {
+      "name": "BONXE",
+      "position_m": [51794.06, 21529.25],
+      "waypoint_type": "FlyBy"
+    },
+    "VAGUX": {
+      "name": "VAGUX",
+      "position_m": [71046.62, -7423.79],
+      "waypoint_type": "FlyBy"
+    },
+    "ELBOD": {
+      "name": "ELBOD",
+      "position_m": [42603.19, -3341.65],
+      "waypoint_type": "FlyBy"
+    },
+    "ME860": {
+      "name": "ME860",
+      "position_m": [25648.49, 30531.15],
+      "waypoint_type": "FlyBy"
+    },
+    "SRN": {
+      "name": "SRN",
+      "position_m": [-20101.51, 23129.63],
+      "waypoint_type": "FlyBy"
+    },
+    "MC885": {
+      "name": "MC885",
+      "position_m": [-14800.03, 28237.66],
+      "waypoint_type": "FlyBy"
+    },
+    "MC541": {
+      "name": "MC541",
+      "position_m": [-41290.19, -46213.43],
+      "waypoint_type": "FlyBy"
+    },
+    "MC695": {
+      "name": "MC695",
+      "position_m": [-42227.29, 55467.95],
+      "waypoint_type": "FlyBy"
+    }
+  },
+  "routes": {},
+  "runways": {},
+  "infringements": [],
+  "arrival_targets": [],
+  "age_in_steps": 0,
+  "age_in_seconds": 0.0
+}

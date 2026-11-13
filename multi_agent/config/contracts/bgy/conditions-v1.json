@@ -1,0 +1,47 @@
+{
+  "baseline_source": {
+    "commit": "567cf729a5b0bd4aefa86f304b7e961dd94c1d5a",
+    "environment_ast_sha256": "b4424db4145fdb5e883101bc82bdfe9937d8b17df9ffb5dda59bc44bcd6ee978",
+    "generation_preprocessing": {
+      "referenced_settings": {
+        "TIME_BETWEEN_ACTIONS": "Constant(value=45)",
+        "TROMBONE_EXCLUSION_SHRINK_FACTOR": "Constant(value=0.8)"
+      },
+      "sources": {
+        "simulator/auto_solve.py": "593c1d072f37d9dbf2ee5fc61f01de86673a7353342c9b324f213e6eee87fb92",
+        "simulator/simulator.py": "4dfbcec33da85e0d46194dba7a4014ba7deeb868917408440e2f3d1be0be944c"
+      }
+    },
+    "note": "Task 3 working tree content; commit identifies parent, content hashes identify baseline source"
+  },
+  "benchmark": {
+    "episode_steps": 128,
+    "preprocessing": "historical-route-exclusion-start-offset-early-auto-solve",
+    "start_offset_max_s": 45,
+    "stratum": {
+      "aircraft_count": 10,
+      "airport": "BGY",
+      "difficulty": "VALIDATION_USE_CASE_2",
+      "id": "bgy-usecase2-10ac",
+      "scenario_config_sha256": "37cd7677604e175a7227a113f65c81b9cd8abaf6eb6a5ccd6e4d7fd820f98ad9",
+      "weight": 1.0
+    }
+  },
+  "conditions_sha256": "f964e95a15c96bae2b67c6af4e9a84dd4e17e6e48ea9f034937c88abada9d35c",
+  "native_artifact": {
+    "extension_sha256": "21f8b23997290cda79c34cdf371936ba54a2a92d7f3b0a54d095229a0e853d9e",
+    "mode": "external",
+    "source_identity": null,
+    "source_provenance": "unverified external artifact; not attributed to checked-in Rust source",
+    "version": "0.2.80",
+    "wheel_sha256": "00880c2a3ece11eb78cc4d78c9feee7ad4c9ef656e038859ee11919dd075d9ec"
+  },
+  "physics": {
+    "horizontal_safezone_radius_nm": 5.0,
+    "simulator_timestep_ms": 1000,
+    "vertical_safezone_radius_ft": 1000.0
+  },
+  "purpose": "campaign",
+  "reservation_sha256": "1bdbbfd11f2e716ce358534c8484b046bc3f9d0b32d33553c476096f78f01e27",
+  "version": 1
+}

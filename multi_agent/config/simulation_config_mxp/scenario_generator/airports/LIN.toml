@@ -1,0 +1,242 @@
+name = "LIN"
+num_approach_waypoints = 2
+position = { x = 0.0, y = 0.0 } # LIML is the reference point
+
+# Waypoints specific to LIN / LIML
+# Coordinates are in meters relative to LIML position
+waypoints = [
+    { x = 43942.02, y = 22900.53, type = "fly-by", name = "AFCOD" },
+    { x = 18495.30, y = -33956.24, type = "fly-by", name = "DORIN" },
+    { x = 1624.34, y = -13369.38, type = "fly-by", name = "FAP" },
+    { x = -10246.77, y = -109649.94, type = "fly-by", name = "GEN" },
+    { x = 38102.62, y = -57210.93, type = "fly-by", name = "IBLUN" },
+    { x = 14333.08, y = -39294.48, type = "fly-by", name = "INVES" },
+    { x = 49237.50, y = -102232.26, type = "fly-by", name = "KALIK" },
+    { x = 29979.02, y = -119027.19, type = "fly-by", name = "KALMO" },
+    { x = 7316.43, y = -53126.03, type = "fly-by", name = "LIMBA" },
+    { x = -16158.58, y = -78706.97, type = "fly-by", name = "ML602" },
+    { x = 26270.70, y = -60179.64, type = "fly-by", name = "ML603" },
+    { x = 9726.63, y = -31264.41, type = "fly-by", name = "ML604" },
+    { x = 10639.87, y = -102713.83, type = "fly-by", name = "ML606" },
+    { x = 5156.45, y = -33196.59, type = "fly-by", name = "ML607" },
+    { x = -5703.05, y = -37736.52, type = "fly-by", name = "ML608" },
+    { x = -559.62, y = 4455.80, type = "fly-by", name = "ML704" },
+    { x = -11831.27, y = -36710.44, type = "fly-by", name = "ML707" },
+    { x = -1921.38, y = 24055.76, type = "fly-by", name = "ML708" },
+    { x = -1390.88, y = 17086.85, type = "fly-by", name = "ML709" },
+    { x = 408.91, y = -6673.06, type = "fly-by", name = "ML711" },
+    { x = 11314.18, y = 24707.91, type = "fly-by", name = "ML714" },
+    { x = 9333.04, y = -69688.00, type = "fly-by", name = "NOGMO" },
+    { x = 82519.15, y = -59590.05, type = "fly-by", name = "OBSUL" },
+    { x = 61783.80, y = -5859.19, type = "fly-by", name = "OSKOR" },
+    { x = 55110.59, y = -40867.98, type = "fly-by", name = "PABRO" },
+    { x = -10475.88, y = -415.69, type = "fly-by", name = "ROMUN" },
+    { x = 2317.45, y = -19031.41, type = "fly-by", name = "SOROP" },
+    { x = -55881.17, y = 819.99, type = "fly-by", name = "SULUR" },
+    { x = 28013.84, y = -33325.43, type = "fly-by", name = "TOVSA" },
+    { x = 14695.58, y = -3411.78, type = "fly-by", name = "TUCOZ" },
+    { x = -10709.44, y = -22547.97, type = "fly-by", name = "UNDAP" },
+    { x = 21169.50, y = -18426.71, type = "fly-by", name = "UVNIB" },
+    { x = -22250.42, y = -49687.07, type = "fly-by", name = "VOG" },
+]
+
+[[runways]]
+id = "RWY17"
+heading = 170.0
+
+[[runways.patterns]]
+name = "ASTIG 4D"
+route = [
+    { name = "ASTIG", speed = 250 },
+    { name = "VOG", min_altitude = 10000, speed = 250 },
+    { name = "SRN", min_altitude = 6000, speed = 210 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "GEN 4D"
+route = [
+    { name = "GEN", speed = 250 },
+    { name = "ML602", min_altitude = 10000, speed = 250 },
+    { name = "VOG", min_altitude = 10000, speed = 250 },
+    { name = "SRN", min_altitude = 6000, speed = 210 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "LUSIL 4C"
+route = [
+    { name = "LUSIL", speed = 250 },
+    { name = "AFCOD", min_altitude = 14000, speed = 250 },
+    { name = "TZO", min_altitude = 6000, speed = 210 },
+    { name = "ML714", min_altitude = 4000, speed = 200 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "ODINA 3C"
+route = [
+    { name = "ODINA", speed = 250 },
+    { name = "ROMUN", min_altitude = 13000, speed = 250 },
+    { name = "TZO", min_altitude = 6000, speed = 210 },
+    { name = "ML714", min_altitude = 4000, speed = 200 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "ODINA 3D"
+route = [
+    { name = "ODINA", speed = 250 },
+    { name = "SULUR", min_altitude = 13000, speed = 250 },
+    { name = "SRN", min_altitude = 6000, speed = 210 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "OSKOR 3C"
+route = [
+    { name = "OSKOR", speed = 250 },
+    { name = "AFCOD", min_altitude = 10000, speed = 250 },
+    { name = "TZO", min_altitude = 6000, speed = 210 },
+    { name = "ML714", min_altitude = 4000, speed = 200 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "OSBUL 4C"
+route = [
+    { name = "OSBUL", speed = 250 },
+    { name = "DORIN", min_altitude = 9000, speed = 250 },
+    { name = "TZO", min_altitude = 6000, speed = 210 },
+    { name = "ML714", min_altitude = 4000, speed = 200 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "KALIK 2C"
+route = [
+    { name = "KALIK", speed = 250 },
+    { name = "ML606", min_altitude = 10000, speed = 250 },
+    { name = "TOVSA", min_altitude = 6000, speed = 230 },
+    { name = "ML607", min_altitude = 6000, speed = 220 },
+    { name = "TZO", min_altitude = 5000, speed = 210 },
+    { name = "ML714", min_altitude = 4000, speed = 200 },
+    { name = "ML708", min_altitude = 4000, speed = 200 },
+]
+
+[[runways]]
+id = "RWY35"
+heading = 350.0
+
+[[runways.patterns]]
+name = "AMOXI 2H"
+route = [
+    { name = "AMOXI", speed = 250 },
+    { name = "NOGMO", min_altitude = 10000, speed = 250 },
+    { name = "LIMBA", min_altitude = 10000, speed = 250 },
+    { name = "DIXER", min_altitude = 6000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "ASTIG 4J"
+route = [
+    { name = "ASTIG", speed = 250 },
+    { name = "VOG", min_altitude = 10000, speed = 250 },
+    { name = "ML707", min_altitude = 6000 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "GEN 5J"
+route = [
+    { name = "GEN", speed = 250 },
+    { name = "ML602", min_altitude = 10000, speed = 250 },
+    { name = "VOG", min_altitude = 10000, speed = 250 },
+    { name = "ML707", min_altitude = 6000 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "KALIK 5A"
+route = [
+    { name = "KALIK", speed = 250 },
+    { name = "IBLUN", min_altitude = 10000, speed = 250 },
+    { name = "TOVSA", min_altitude = 6000, speed = 230 },
+    { name = "UVNIB", min_altitude = 5000, speed = 210 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "KALIK 3B"
+route = [
+    { name = "KALIK", speed = 250 },
+    { name = "NOGMO", min_altitude = 10000, speed = 250 },
+    { name = "LIMBA", min_altitude = 10000, speed = 250 },
+    { name = "DIXER", min_altitude = 6000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "KALIK 3D"
+route = [
+    { name = "KALIK", speed = 250 },
+    { name = "ML603", min_altitude = 10000, speed = 250 },
+    { name = "INVES", min_altitude = 6000, speed = 230 },
+    { name = "ML604", min_altitude = 5000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "LUSIL 4A"
+route = [
+    { name = "LUSIL", speed = 250 },
+    { name = "AFCOD", min_altitude = 14000, speed = 250 },
+    { name = "UVNIB", min_altitude = 6000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "ODINA 4A"
+route = [
+    { name = "ODINA", speed = 250 },
+    { name = "TZO", min_altitude = 13000, speed = 250 },
+    { name = "UVNIB", min_altitude = 6000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "OSBUL 4B"
+route = [
+    { name = "OSBUL", speed = 250 },
+    { name = "PABRO", min_altitude = 9000, speed = 250 },
+    { name = "UVNIB", min_altitude = 5000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "OSKOR 4A"
+route = [
+    { name = "OSKOR", speed = 250 },
+    { name = "AFCOD", min_altitude = 10000, speed = 250 },
+    { name = "UVNIB", min_altitude = 6000, speed = 220 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "SRN 3N"
+route = [
+    { name = "SRN", min_altitude = 10000, speed = 250 },
+    { name = "UNDAP", min_altitude = 5000, speed = 230 },
+    { name = "ML608", speed = 220 },
+    { name = "DIXER", min_altitude = 5000, speed = 210 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]
+
+[[runways.patterns]]
+name = "SRN 3S"
+route = [
+    { name = "SRN", min_altitude = 10000, speed = 250 },
+    { name = "UNDAP", min_altitude = 5000, speed = 230 },
+    { name = "SOROP", min_altitude = 3000, speed = 200 },
+]

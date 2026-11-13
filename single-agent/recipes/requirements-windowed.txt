@@ -1,0 +1,19 @@
+# Python 3.12 windowed requirements. Install in your Python environment:
+#   pip install -r recipes/requirements-windowed.txt
+#   pip install ../artifacts/simulator/wheels/flight_simulator-0.2.80-cp312-cp312-<platform>.whl
+#   (pick the wheel for your platform; see ../artifacts/simulator/README.md)
+# GPU: use jax[cuda12] with a compatible NVIDIA driver. CPU: use jax==0.7.1.
+torch==2.8.0              # CPU build is enough: the policy is only ever evaluated on CPU (--index-url https://download.pytorch.org/whl/cpu)
+jax[cuda12]==0.7.1
+flax==0.12.0
+optax==0.2.8
+stable_baselines3==2.9.0
+gymnasium==1.1.1
+numpy>=2,<3
+matplotlib==3.10.8
+imageio==2.37.2
+imageio-ffmpeg==0.6.0
+pandas
+scipy
+tensorboard
+python-dotenv

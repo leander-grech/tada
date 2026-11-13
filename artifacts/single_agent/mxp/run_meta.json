@@ -1,0 +1,41 @@
+{
+  "action_set": "v2",
+  "airport_mask": "monad",
+  "mask_frame_fix": true,
+  "trainer": "jax",
+  "env": "windowed",
+  "windowed_config": {
+    "stitch_segments": 1,
+    "reward_mode": "outcome_pbrs",
+    "landing_brackets": [
+      [
+        30.0,
+        4.0
+      ],
+      [
+        60.0,
+        3.0
+      ],
+      [
+        120.0,
+        1.0
+      ],
+      [
+        300.0,
+        0.0
+      ],
+      [
+        600.0,
+        -1.5
+      ]
+    ],
+    "release_locked": true,
+    "release_dev_s": 30.0,
+    "pay_at_release": true,
+    "pbrs_flat_deviation": true,
+    "scenario_aircraft_count": 20
+  },
+  "sequence_obs": true,
+  "aircraft_scalar_len": 17,
+  "max_picks": 2
+}

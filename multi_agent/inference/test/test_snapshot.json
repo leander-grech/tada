@@ -1,0 +1,354 @@
+[
+    {
+        "callSign": "TEST001",
+        "manuallyUpdatedSpeed": false,
+        "identified": false,
+        "state": {
+            "position": [
+                42.66642548596112,
+                36.95029427645789
+            ],
+            "heading": 328.75827905576585,
+            "speed": 350,
+            "altitude": 30800,
+            "status": 1,
+            "controlMode": "route",
+            "controlStatus": 2,
+            "turnDirection": 0,
+            "cautionState": "neutral"
+        },
+        "targetState": {
+            "heading": 328.75827905576585,
+            "speed": 350,
+            "altitude": 30800
+        },
+        "routeTracker": {
+            "currentIndex": 0,
+            "route": [
+                {
+                    "name": "OSBUL",
+                    "location": [
+                        42.67499244060475,
+                        -37.06401457883369
+                    ],
+                    "speed": 250
+                },
+                {
+                    "name": "ATMIP",
+                    "location": [
+                        34.33007019438445,
+                        -23.340244600431966
+                    ],
+                    "min_altitude": 6000,
+                    "speed": 230
+                },
+                {
+                    "name": "ME732",
+                    "location": [
+                        27.344857451403886,
+                        -12.5288282937365
+                    ],
+                    "min_altitude": 6000,
+                    "max_altitude": 12000,
+                    "speed": 220
+                },
+                {
+                    "name": "ME628",
+                    "location": [
+                        27.609602591792655,
+                        -8.482826673866091
+                    ],
+                    "min_altitude": 6000,
+                    "speed": 220
+                },
+                {
+                    "name": "ME624",
+                    "location": [
+                        31.861136069114472,
+                        -7.870960583153348
+                    ],
+                    "min_altitude": 6000,
+                    "max_altitude": 9000,
+                    "speed": 220
+                },
+                {
+                    "name": "ME620",
+                    "location": [
+                        35.841649028077754,
+                        -6.223038336933045
+                    ],
+                    "min_altitude": 6000,
+                    "max_altitude": 9000,
+                    "speed": 220
+                },
+                {
+                    "name": "ME616",
+                    "location": [
+                        38.66272678185745,
+                        -3.468957343412527
+                    ],
+                    "min_altitude": 6000,
+                    "max_altitude": 9000,
+                    "speed": 220
+                },
+                {
+                    "name": "ULVUN",
+                    "location": [
+                        40.42312095032397,
+                        1.9877957343412527
+                    ],
+                    "min_altitude": 6000,
+                    "max_altitude": 9000,
+                    "speed": 220
+                },
+                {
+                    "name": "TIXUM",
+                    "location": [
+                        28.42617332613391,
+                        4.268873110151188
+                    ],
+                    "min_altitude": 6000,
+                    "speed": 210
+                },
+                {
+                    "name": "AVHEB",
+                    "location": [
+                        28.044481641468682,
+                        8.450697084233262
+                    ],
+                    "min_altitude": 4000,
+                    "speed": 200
+                },
+                {
+                    "name": "BONXE",
+                    "location": [
+                        27.93015766738661,
+                        11.452998380129591
+                    ],
+                    "min_altitude": 3400,
+                    "speed": 175
+                },
+                {
+                    "name": "BGY_10_APP00",
+                    "location": [
+                        21.76233477321814,
+                        12.947450323974081
+                    ],
+                    "max_altitude": 3500,
+                    "speed": 170
+                },
+                {
+                    "name": "BGY",
+                    "location": [
+                        18.828261339092872,
+                        13.572921166306696
+                    ]
+                }
+            ]
+        },
+        "scheduledCommands": [],
+        "tadaSuggestions": [],
+        "amanArrivalTime": 886.8534,
+        "amanOffsetSeconds": 30,
+        "historyPath": [],
+        "secondsToStart": 0
+    },
+    {
+        "callSign": "TEST002",
+        "manuallyUpdatedSpeed": false,
+        "identified": false,
+        "state": {
+            "position": [
+                -32.98155291576674,
+                -40.32616630669546
+            ],
+            "heading": 158.7690831348963,
+            "speed": 350,
+            "altitude": 30200,
+            "status": 1,
+            "controlMode": "route",
+            "controlStatus": 2,
+            "turnDirection": 0,
+            "cautionState": "neutral"
+        },
+        "targetState": {
+            "heading": 158.7690831348963,
+            "speed": 350,
+            "altitude": 30200
+        },
+        "routeTracker": {
+            "currentIndex": 0,
+            "route": [
+                {
+                    "name": "AKASU",
+                    "location": [
+                        -32.869591792656585,
+                        40.30066414686825
+                    ]
+                },
+                {
+                    "name": "RIXUV",
+                    "location": [
+                        -28.17322354211663,
+                        27.495705723542116
+                    ],
+                    "speed": 250
+                },
+                {
+                    "name": "MC685",
+                    "location": [
+                        -21.85222030237581,
+                        19.70956425485961
+                    ],
+                    "min_altitude": 12000
+                },
+                {
+                    "name": "EVGIR",
+                    "location": [
+                        -17.498710043196546,
+                        11.695318034557236
+                    ],
+                    "min_altitude": 9000,
+                    "max_altitude": 11000,
+                    "speed": 230
+                },
+                {
+                    "name": "MC768",
+                    "location": [
+                        -15.726210043196543,
+                        3.9366997840172786
+                    ],
+                    "min_altitude": 9000,
+                    "speed": 230
+                },
+                {
+                    "name": "MC761",
+                    "location": [
+                        -14.198364470842332,
+                        -3.0633299136069114
+                    ],
+                    "min_altitude": 4000,
+                    "max_altitude": 6000,
+                    "speed": 220
+                },
+                {
+                    "name": "MC756",
+                    "location": [
+                        -13.347290496760259,
+                        -7.805816954643628
+                    ],
+                    "min_altitude": 4000,
+                    "max_altitude": 6000,
+                    "speed": 220
+                },
+                {
+                    "name": "ESITE",
+                    "location": [
+                        -12.478054535637149,
+                        -13.020834773218143
+                    ],
+                    "min_altitude": 4000,
+                    "max_altitude": 6000,
+                    "speed": 210
+                },
+                {
+                    "name": "MC746",
+                    "location": [
+                        -11.684998380129588,
+                        -17.802706803455724
+                    ],
+                    "min_altitude": 4000,
+                    "max_altitude": 6000,
+                    "speed": 210
+                },
+                {
+                    "name": "MC741",
+                    "location": [
+                        -10.69884989200864,
+                        -22.77640496760259
+                    ],
+                    "min_altitude": 4000,
+                    "max_altitude": 6000,
+                    "speed": 210
+                },
+                {
+                    "name": "MC435",
+                    "location": [
+                        -16.34615118790497,
+                        -23.6407030237581
+                    ],
+                    "min_altitude": 4000,
+                    "max_altitude": 5000,
+                    "speed": 210
+                },
+                {
+                    "name": "MC430",
+                    "location": [
+                        -17.542775377969765,
+                        -18.753574514038878
+                    ],
+                    "min_altitude": 4000,
+                    "speed": 210
+                },
+                {
+                    "name": "MC425",
+                    "location": [
+                        -18.288841252699786,
+                        -13.914305075593953
+                    ],
+                    "min_altitude": 4000,
+                    "speed": 210
+                },
+                {
+                    "name": "MC420",
+                    "location": [
+                        -19.431684665226783,
+                        -8.944444384449245
+                    ],
+                    "min_altitude": 4000,
+                    "speed": 200
+                },
+                {
+                    "name": "INLER",
+                    "location": [
+                        -20.327375809935205,
+                        -3.993208963282937
+                    ],
+                    "min_altitude": 4000,
+                    "speed": 190
+                },
+                {
+                    "name": "MXP_35L_APP00",
+                    "location": [
+                        -21.98101079913607,
+                        4.316108855291577
+                    ],
+                    "max_altitude": 4000,
+                    "speed": 190
+                },
+                {
+                    "name": "MXP_35L_APP01",
+                    "location": [
+                        -22.60059233261339,
+                        7.251431425485961
+                    ],
+                    "max_altitude": 3500,
+                    "speed": 170
+                },
+                {
+                    "name": "MXP",
+                    "location": [
+                        -23.220172786177105,
+                        10.18675485961123
+                    ]
+                }
+            ]
+        },
+        "scheduledCommands": [],
+        "tadaSuggestions": [],
+        "amanArrivalTime": 1468.4453,
+        "amanOffsetSeconds": -10,
+        "historyPath": [],
+        "secondsToStart": 38.516235
+    }
+]

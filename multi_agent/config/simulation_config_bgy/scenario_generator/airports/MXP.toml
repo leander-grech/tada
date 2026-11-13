@@ -1,0 +1,242 @@
+name = "MXP"
+num_approach_waypoints = 2
+position = { x = -43003.76, y = 18865.87 } # LIMC relative to LIML
+validation_separation_nm = 10.0
+
+# Trombone pattern specific to MXP / LIMC
+# Coordinates are in meters relative to LIML position
+waypoints = [
+    { x = -65935.08, y = 17094.89, type = "fly-by", name = "EGFOL" },
+    { x = -23095.76, y = -23748.23, type = "fly-by", name = "ESITE" },
+    { x = -32350.45, y = 21523.06, type = "fly-by", name = "EVGIR" },
+    { x = 21533.82, y = 46138.14, type = "fly-by", name = "EVRIP" },
+    { x = -58505.55, y = -25047.33, type = "fly-by", name = "IBSAP" },
+    { x = -44836.37, y = -28015.48, type = "fly-by", name = "IKREZ" },
+    { x = -37415.94, y = -7606.91, type = "fly-by", name = "INLER" },
+    { x = -52818.48, y = 20985.62, type = "fly-by", name = "KUPBE" },
+    { x = -35677.12, y = -16770.05, type = "fly-by", name = "MC420" },
+    { x = -33935.49, y = -25881.86, type = "fly-by", name = "MC425" },
+    { x = -32199.06, y = -34994.28, type = "fly-by", name = "MC430" },
+    { x = -30467.62, y = -44107.33, type = "fly-by", name = "MC435" },
+    { x = -41290.19, y = -46213.43, type = "fly-by", name = "MC541" },
+    { x = -43047.66, y = -37103.48, type = "fly-by", name = "MC546" },
+    { x = -46544.59, y = -18885.43, type = "fly-by", name = "MC556" },
+    { x = -48305.96, y = -9777.33, type = "fly-by", name = "MC561" },
+    { x = -60989.65, y = -12272.12, type = "fly-by", name = "MC568" },
+    { x = -55665.62, y = -39586.83, type = "fly-by", name = "MC583" },
+    { x = -53904.47, y = -48694.00, type = "fly-by", name = "MC588" },
+    { x = -34106.03, y = 28835.69, type = "fly-by", name = "MC680" },
+    { x = -40235.70, y = 36291.94, type = "fly-by", name = "MC685" },
+    { x = -39512.32, y = 46591.15, type = "fly-by", name = "MC690" },
+    { x = -42227.29, y = 55467.95, type = "fly-by", name = "MC695" },
+    { x = -19643.51, y = -42021.02, type = "fly-by", name = "MC741" },
+    { x = -21360.20, y = -32904.88, type = "fly-by", name = "MC746" },
+    { x = -24808.11, y = -14674.77, type = "fly-by", name = "MC756" },
+    { x = -26539.55, y = -5560.48, type = "fly-by", name = "MC761" },
+    { x = -28972.03, y = 7198.28, type = "fly-by", name = "MC768" },
+    { x = -13829.94, y = 24063.18, type = "fly-by", name = "MC785" },
+    { x = 5436.17, y = 23933.62, type = "fly-by", name = "MC795" },
+    { x = -23113.12, y = 24104.31, type = "fly-by", name = "MC880" },
+    { x = -14800.03, y = 28237.66, type = "fly-by", name = "MC885" },
+    { x = 1858.07, y = 36464.48, type = "fly-by", name = "MC895" },
+    { x = -46110.21, y = 39347.66, type = "fly-by", name = "MC905" },
+    { x = -50775.10, y = 2974.01, type = "fly-by", name = "MC968" },
+    { x = -55713.36, y = 34116.57, type = "fly-by", name = "MC985" },
+    { x = 27362.48, y = 23950.17, type = "fly-by", name = "PEXUG" },
+    { x = -52280.23, y = 51114.13, type = "fly-by", name = "RIXUV" },
+    { x = -56050.26, y = 37346.02, type = "fly-by", name = "VAFRA" },
+    { x = -53298.31, y = 15770.19, type = "fly-by", name = "XELGA" },
+]
+
+[[runways]]
+id = "35L"
+heading = 350.0
+
+[[runways.patterns]]
+name = "ASTIG 3E"
+validation_scenario = true
+spawn_point = "TOP"
+route = [
+    { name = "ASTIG", max_altitude = 16000, speed = 250 },
+    { name = "MC588", max_altitude = 12000, min_altitude = 6000, speed = 250 },
+    { name = "MC583", max_altitude = 12000, min_altitude = 6000 },
+    { name = "IBSAP", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "MC568", max_altitude = 9000, min_altitude = 5000, speed = 230 },
+    { name = "MC561", max_altitude = 6000, min_altitude = 5000, speed = 220 },
+    { name = "MC556", max_altitude = 6000, min_altitude = 5000, speed = 220, drop_index = 7 },
+    { name = "IKREZ", max_altitude = 6000, min_altitude = 5000, speed = 210, drop_index = 6 },
+    { name = "MC546", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 5 },
+    { name = "MC541", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 4 },
+    { name = "MC435", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 4 },
+    { name = "MC430", min_altitude = 4000, speed = 210, drop_index = 5 },
+    { name = "MC425", min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC420", min_altitude = 4000, speed = 200, drop_index = 7 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+
+]
+aman_route = [
+    { name = "ASTIG", max_altitude = 16000, speed = 250 },
+    { name = "MC588", max_altitude = 12000, min_altitude = 6000, speed = 250 },
+    { name = "MC583", max_altitude = 12000, min_altitude = 6000 },
+    { name = "IBSAP", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "MC568", max_altitude = 9000, min_altitude = 5000, speed = 230 },
+    { name = "MC561", max_altitude = 6000, min_altitude = 5000, speed = 220 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+
+[[runways.patterns]]
+name = "DEVOX 3E"
+validation_scenario = true
+spawn_point = "NOSTA"
+route = [
+    { name = "DEVOX", max_altitude = 20000, speed = 250 },
+    { name = "MC588", max_altitude = 12000, min_altitude = 10000, speed = 250 },
+    { name = "MC583", max_altitude = 12000, min_altitude = 6000 },
+    { name = "IBSAP", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "MC568", max_altitude = 9000, min_altitude = 5000, speed = 230 },
+    { name = "MC561", max_altitude = 6000, min_altitude = 5000, speed = 220 },
+    { name = "MC556", max_altitude = 6000, min_altitude = 5000, speed = 220, drop_index = 7 },
+    { name = "IKREZ", max_altitude = 6000, min_altitude = 5000, speed = 210, drop_index = 6 },
+    { name = "MC546", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 5 },
+    { name = "MC541", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 4 },
+    { name = "MC435", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 4 },
+    { name = "MC430", min_altitude = 4000, speed = 210, drop_index = 5 },
+    { name = "MC425", min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC420", min_altitude = 4000, speed = 200, drop_index = 7 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+aman_route = [
+    { name = "DEVOX", max_altitude = 20000, speed = 250 },
+    { name = "MC588", max_altitude = 12000, min_altitude = 10000, speed = 250 },
+    { name = "MC583", max_altitude = 12000, min_altitude = 6000 },
+    { name = "IBSAP", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "MC568", max_altitude = 9000, min_altitude = 5000, speed = 230 },
+    { name = "MC561", max_altitude = 6000, min_altitude = 5000, speed = 220 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+
+[[runways.patterns]]
+name = "EVRIP 3E"
+validation_scenario = true
+spawn_point = "LUSIL"
+route = [
+    { name = "EVRIP", speed = 250 },
+    { name = "MC895", min_altitude = 13000, speed = 250 },
+    { name = "MC885", min_altitude = 10000 },
+    { name = "MC880", min_altitude = 6000 },
+    { name = "EVGIR", max_altitude = 11000, min_altitude = 6000, speed = 230 },
+    { name = "MC768", min_altitude = 4000, speed = 230 },
+    { name = "MC761", max_altitude = 6000, min_altitude = 4000, speed = 220 },
+    { name = "MC756", max_altitude = 6000, min_altitude = 4000, speed = 220, drop_index = 9 },
+    { name = "ESITE", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 8 },
+    { name = "MC746", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 7 },
+    { name = "MC741", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC435", max_altitude = 5000, min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC430", min_altitude = 4000, speed = 210, drop_index = 7 },
+    { name = "MC425", min_altitude = 4000, speed = 210, drop_index = 8 },
+    { name = "MC420", min_altitude = 4000, speed = 200, drop_index = 9 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+aman_route = [
+    { name = "EVRIP", speed = 250 },
+    { name = "MC895", min_altitude = 13000, speed = 250 },
+    { name = "MC885", min_altitude = 10000 },
+    { name = "MC880", min_altitude = 6000 },
+    { name = "EVGIR", max_altitude = 11000, min_altitude = 6000, speed = 230 },
+    { name = "MC768", min_altitude = 4000, speed = 230 },
+    { name = "MC761", max_altitude = 6000, min_altitude = 4000, speed = 220 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+
+[[runways.patterns]]
+name = "MEBUR 3E"
+validation_scenario = true
+spawn_point = "IDONA"
+route = [
+    { name = "MEBUR", max_altitude = 20000, speed = 250 },
+    { name = "MC588", max_altitude = 12000, min_altitude = 10000, speed = 250 },
+    { name = "MC583", max_altitude = 12000, min_altitude = 6000 },
+    { name = "IBSAP", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "MC568", max_altitude = 9000, min_altitude = 5000, speed = 230 },
+    { name = "MC561", max_altitude = 6000, min_altitude = 5000, speed = 220 },
+    { name = "MC556", max_altitude = 6000, min_altitude = 5000, speed = 220, drop_index = 7 },
+    { name = "IKREZ", max_altitude = 6000, min_altitude = 5000, speed = 210, drop_index = 6 },
+    { name = "MC546", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 5 },
+    { name = "MC541", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 4 },
+    { name = "MC435", max_altitude = 5000, min_altitude = 5000, speed = 210, drop_index = 4 },
+    { name = "MC430", min_altitude = 4000, speed = 210, drop_index = 5 },
+    { name = "MC425", min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC420", min_altitude = 4000, speed = 200, drop_index = 7 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+aman_route = [
+    { name = "MEBUR", max_altitude = 20000, speed = 250 },
+    { name = "MC588", max_altitude = 12000, min_altitude = 10000, speed = 250 },
+    { name = "MC583", max_altitude = 12000, min_altitude = 6000 },
+    { name = "IBSAP", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "MC568", max_altitude = 9000, min_altitude = 5000, speed = 230 },
+    { name = "MC561", max_altitude = 6000, min_altitude = 5000, speed = 220 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+
+[[runways.patterns]]
+name = "PEXUG 3E"
+validation_scenario = true
+spawn_point = "NOBMI"
+route = [
+    { name = "PEXUG", max_altitude = 19000, speed = 250 },
+    { name = "MC795", min_altitude = 7000, speed = 250 },
+    { name = "MC785", min_altitude = 6000 },
+    { name = "MC880", min_altitude = 6000 },
+    { name = "EVGIR", max_altitude = 11000, min_altitude = 6000, speed = 230 },
+    { name = "MC768", min_altitude = 4000, speed = 230 },
+    { name = "MC761", max_altitude = 6000, min_altitude = 4000, speed = 220 },
+    { name = "MC756", max_altitude = 6000, min_altitude = 4000, speed = 220, drop_index = 9 },
+    { name = "ESITE", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 8 },
+    { name = "MC746", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 7 },
+    { name = "MC741", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC435", max_altitude = 5000, min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC430", min_altitude = 4000, speed = 210, drop_index = 7 },
+    { name = "MC425", min_altitude = 4000, speed = 210, drop_index = 8 },
+    { name = "MC420", min_altitude = 4000, speed = 200, drop_index = 9 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+aman_route = [
+    { name = "PEXUG", max_altitude = 19000, speed = 250 },
+    { name = "MC795", min_altitude = 7000, speed = 250 },
+    { name = "MC785", min_altitude = 6000 },
+    { name = "MC880", min_altitude = 6000 },
+    { name = "EVGIR", max_altitude = 11000, min_altitude = 6000, speed = 230 },
+    { name = "MC768", min_altitude = 4000, speed = 230 },
+    { name = "MC761", max_altitude = 6000, min_altitude = 4000, speed = 220 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+
+[[runways.patterns]]
+name = "RIXUV 3E"
+validation_scenario = true
+spawn_point = "AKASU"
+route = [
+    { name = "RIXUV", max_altitude = 19000, speed = 250 },
+    { name = "MC685", min_altitude = 12000 },
+    { name = "EVGIR", max_altitude = 11000, min_altitude = 9000, speed = 230 },
+    { name = "MC768", min_altitude = 9000, speed = 230 },
+    { name = "MC761", max_altitude = 6000, min_altitude = 4000, speed = 220 },
+    { name = "MC756", max_altitude = 6000, min_altitude = 4000, speed = 220, drop_index = 7 },
+    { name = "ESITE", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC746", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 5 },
+    { name = "MC741", max_altitude = 6000, min_altitude = 4000, speed = 210, drop_index = 4 },
+    { name = "MC435", max_altitude = 5000, min_altitude = 4000, speed = 210, drop_index = 4 },
+    { name = "MC430", min_altitude = 4000, speed = 210, drop_index = 5 },
+    { name = "MC425", min_altitude = 4000, speed = 210, drop_index = 6 },
+    { name = "MC420", min_altitude = 4000, speed = 200, drop_index = 7 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]
+aman_route = [
+    { name = "RIXUV", max_altitude = 19000, speed = 250 },
+    { name = "MC685", min_altitude = 12000 },
+    { name = "EVGIR", max_altitude = 11000, min_altitude = 9000, speed = 230 },
+    { name = "MC768", min_altitude = 9000, speed = 230 },
+    { name = "MC761", max_altitude = 6000, min_altitude = 4000, speed = 220 },
+    { name = "INLER", min_altitude = 4000, speed = 190 },
+]

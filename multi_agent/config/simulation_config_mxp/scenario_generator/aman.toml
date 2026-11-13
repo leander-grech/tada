@@ -1,0 +1,126 @@
+# AMAN Route Optimization Configuration
+# This file defines how routes are optimized for more accurate arrival time estimation
+# Based on Eurocontrol Point Merge and CDO/CCO concepts
+
+# ==============================================================================
+# MXP Airport - Trombone Pattern Optimization
+# ==============================================================================
+[airports.MXP]
+
+# General optimization settings
+[airports.MXP.optimization]
+# Critical waypoints that must be kept for safe navigation (turns, final approach)
+critical_waypoints = ["INLER"] # Final approach sequence
+# Entry points that should be preserved
+entry_points = ["EVGIR", "EGFOL", "EVRIP", "PEXUG", "RIXUV", "ODINA"]
+
+# First aircraft optimization - takes most direct route possible
+[airports.MXP.first_aircraft]
+description = "First aircraft takes direct route with minimum waypoints for safe navigation"
+skip_pattern = "direct_to_critical"
+# Minimal waypoint set: entry + optimal intermediate + INLER  
+# CORRECTED: Turns ≥90° are SAFE (wide turns), <90° are DANGEROUS (needle-point)
+# Eastern trombone: MC761 (90.1°), MC756 (129.9°), MC435 (170.0°) - SAFE wide turns
+# Western trombone: MC568 (93.0°), MC556 (113.6°), IKREZ (135.8°) - SAFE wide turns  
+keep_waypoints_suffix = [
+    "MC761",
+    "MC756",
+    "MC435",
+    "MC568",
+    "MC556",
+    "IKREZ",
+    "INLER",
+] # Will keep entry point + applicable intermediate + INLER
+
+# Subsequent aircraft optimization - progressive trombone usage
+[airports.MXP.subsequent_aircraft]
+description = "Progressive optimization: 2nd aircraft skips 60%, 3rd skips 40%, 4th+ use full trombone"
+skip_pattern = "progressive_trombone"
+# Define the full trombone pattern waypoints (both eastern and western)
+# Eastern: MC768 → MC761 → MC756 → ESITE → MC746 → MC741 → MC435 → MC430 → MC425 → MC420
+# Western: MC561 → MC556 → IKREZ → MC546 → MC541 → MC435 → MC430 → MC425 → MC420  
+trombone_waypoints = [
+    "MC588",
+    "MC768",
+    "MC761",
+    "MC756",
+    "ESITE",
+    "MC746",
+    "MC741",
+    "MC561",
+    "MC556",
+    "IKREZ",
+    "MC546",
+    "MC541",
+    "MC435",
+    "MC430",
+    "MC425",
+    "MC420",
+]
+# Percentage to skip for each aircraft position (0 = keep all, 100 = skip all)
+skip_percentages = [
+    0,
+    60,
+    40,
+    20,
+    0,
+    0,
+] # index 0 is first aircraft (handled separately)
+
+# ==============================================================================
+# BGY Airport - Point Merge System Optimization
+# ==============================================================================
+[airports.BGY]
+
+# General optimization settings
+[airports.BGY.optimization]
+# The merge point where all sequencing legs converge
+merge_point = "TIXUM"
+# Critical waypoints for safe operations
+critical_waypoints = ["TIXUM", "LASAV"] # Merge point and final approach fix
+# The arc waypoints that form the sequencing legs (ULVUN is the last arc point)
+sequencing_arc = ["ME632", "ME628", "ME624", "ME620", "ME616", "ULVUN"]
+
+# First aircraft optimization - early merge from sequencing leg
+[airports.BGY.first_aircraft]
+description = "First aircraft takes earliest possible merge from sequencing leg"
+skip_pattern = "early_merge"
+# Skip from first arc waypoint directly to merge point (bypassing rest of arc including ULVUN)
+early_merge_route = ["ME632", "TIXUM", "LASAV"]
+
+# Subsequent aircraft optimization - progressive arc usage
+[airports.BGY.subsequent_aircraft]
+description = "Progressive arc usage: 2nd uses 40% of arc, 3rd uses 60%, 4th+ use full arc"
+skip_pattern = "progressive_merge"
+# Percentage of arc to use for each aircraft position (6 arc waypoints: ME632->ME628->ME624->ME620->ME616->ULVUN)
+arc_usage_percentages = [
+    20,
+    40,
+    60,
+    80,
+    100,
+    100,
+] # index 0 unused (first aircraft uses early_merge), index 1+ = 2nd aircraft onward
+
+# ==============================================================================
+# Pattern Definitions (for reference and extensibility)
+# ==============================================================================
+[pattern_types]
+
+[pattern_types.direct_to_critical]
+description = "Skip all waypoints except entry, critical waypoints, and minimum for safe turns"
+
+[pattern_types.early_merge]
+description = "Take earliest possible merge point in Point Merge System"
+
+[pattern_types.progressive_trombone]
+description = "Progressively use more of the trombone pattern based on aircraft sequence"
+
+[pattern_types.progressive_merge]
+description = "Progressively use more of the sequencing arc based on aircraft sequence"
+
+[pattern_types.every_other]
+description = "Skip every other waypoint (legacy pattern)"
+
+[pattern_types.specific]
+description = "Skip specific listed waypoints"

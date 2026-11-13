@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "threshold_s": 60,
+  "verification_cap_s": 6000,
+  "primary": {"mode": "deterministic", "attempts": 1},
+  "supplementary": {"mode": "stochastic-all-k", "early_stop": false},
+  "rng": "benchmark-world-attempt-domain-sha256-v1",
+  "selection": "canonical-eligible-success-delayed-conservative-time-all-commands-ordinal",
+  "cost": "all-preprocessing-and-learned-commands; all-attempt-work",
+  "statistical": {
+    "unit": "world", "retries": "clustered", "bootstrap_resamples": 10000,
+    "percentiles": [2.5, 97.5], "marginal_interval_error": "0.05/(2H)",
+    "method_upper_tail": "0.05/H", "unknown": "conservative-event-count-envelope",
+    "development": "adaptive-diagnostic-not-post-selection-population-inference"
+  }
+}

@@ -1,0 +1,2439 @@
+{
+  "version": 1,
+  "purpose": "campaign",
+  "strata": [
+    {
+      "id": "bgy-usecase2-10ac",
+      "airport": "BGY",
+      "difficulty": "VALIDATION_USE_CASE_2",
+      "aircraft_count": 10,
+      "weight": 1.0,
+      "scenario_config_sha256": "37cd7677604e175a7227a113f65c81b9cd8abaf6eb6a5ccd6e4d7fd820f98ad9"
+    }
+  ],
+  "validation": [
+    {
+      "seed": 41,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 786551703,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1595180635,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1001495968,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1123251507,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 921959045,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 478163327,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 107420369,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1181241943,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1051802512,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 958682846,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 599310825,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 440213415,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 373399426,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1812140441,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 136505587,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 127978094,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 402418010,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 939042955,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 999270936,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 113971123,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 854001193,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1801823908,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 946785248,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1929338154,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1194819984,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 27911967,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 685731524,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1815115025,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1461364854,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1193448329,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 667779376,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 924765563,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1445662585,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 438989805,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 398340369,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1631775357,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 415393687,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1541804686,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1477278577,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1136108454,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 186618211,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1973214822,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 536124280,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1625792787,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 338444264,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1259191105,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1553210608,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 825873196,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 298737106,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 196814233,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 978815630,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1242911821,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 342703921,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 999829240,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 433797840,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1632629719,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1193887545,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1947382419,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1566942273,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 698594025,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1589915144,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1525876051,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 899825838,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1146660997,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 306671447,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 735034881,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1051454923,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 701808367,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1985392498,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1629748727,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1159417075,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 943239974,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1392783743,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 240251661,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 983753977,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 137869475,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1354860540,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1722989659,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1149938334,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 284277889,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 906164396,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1351531223,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 913224047,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 2144181937,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1699226064,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1970753705,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 613628803,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1137651678,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 599707677,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1059257080,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1128466620,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1840109255,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1715412119,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 1554762903,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 941975480,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 594130308,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 2119634399,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 390452952,
+      "stratum": "published-validation"
+    },
+    {
+      "seed": 202363285,
+      "stratum": "published-validation"
+    }
+  ],
+  "heldout": [
+    {
+      "seed": 1691106683,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 119532416,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1244834284,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 122265628,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2001722375,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1690372087,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1222876799,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 319273513,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1942944472,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1000858349,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 595164825,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 43520935,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 929016130,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1143861606,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 574027256,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1591922248,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1740636091,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1808301975,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1872409746,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2081805657,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1343060920,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1098896290,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1951832056,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2081959027,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1058567868,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 945250711,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 430143167,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1442739137,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1636127423,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1764623049,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1245330720,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 991714474,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 598734442,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2021334946,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 165225547,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1409790725,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1727923813,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1003708856,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1944855364,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1352160178,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 309878226,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 815037696,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 581368156,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1324681967,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1836389658,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 784725425,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2007744120,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 188507201,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1782603223,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 888882548,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1368070726,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 65406752,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1439990033,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 459564555,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1889477064,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 213966790,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 555186879,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1622707826,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 592979726,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 291280847,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 551999223,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1671803703,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 73774092,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1493903514,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 201322185,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1822024445,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 471990425,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 173929191,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1537182621,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 783976827,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 833944487,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2124503274,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 177857970,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 506806394,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1670537292,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1707178219,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 276037307,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1199146766,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 779567039,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1205079456,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1541735356,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1340502952,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 431511514,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1001323938,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1959893619,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 622929404,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 311013925,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1727440073,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1092643383,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 835686183,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1799332063,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 57958365,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 121697581,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1384707341,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1460496244,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 249191253,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 281309823,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1259322,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1637355574,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1501942942,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 670735451,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1844080248,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 381934897,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 162760836,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 889452981,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 659959768,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1494448640,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1809856920,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 19811537,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 143653851,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 402207846,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 449406638,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 768940784,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 544679175,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1788099381,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2104628970,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1586246643,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 96526213,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 882839476,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 685358610,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1122026800,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1853866178,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 958190253,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1820064697,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1272731143,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1921213588,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 204490762,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 770549845,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1612035985,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1641594652,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 559726471,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 536685528,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1807560688,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 367294545,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1497283093,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 632026623,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1891860693,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 180121666,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2016159453,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 947214456,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1366643920,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1964477591,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1508406053,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1420627098,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 116289786,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 626632996,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2005573819,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 490762410,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2133049975,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 786287095,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 563758479,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2098280769,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 746951364,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 37147928,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1518465109,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 258091052,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 687950266,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1763538777,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 220693394,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 869622686,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2093112562,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1213223160,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2084635161,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 253179571,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 525403273,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 792163809,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2140146882,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1385455612,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2104685689,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 155450029,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1600662263,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 112865913,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1128224981,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 429582687,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1865123557,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 507779086,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1114361049,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1633030730,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1119004702,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 752314035,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 511675194,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 888091764,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1453929719,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1873887428,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 228624988,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1418397807,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 85730627,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1375132488,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 993100675,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 838934631,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1914749495,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1069136322,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1079177098,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1971552358,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 539262588,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 669313431,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1433417647,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2143669866,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1929664468,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1498998604,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    }
+  ],
+  "replacements": [
+    {
+      "seed": 483787795,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 212329229,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 540318880,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1116849374,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1603161318,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 358343472,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 233445520,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1369983399,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1567500598,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 896891110,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1595508340,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 953115341,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 907015890,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1037644774,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 289381769,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1245811619,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 839062331,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1217839946,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 689953951,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 12271663,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 691242288,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 417321374,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1657189335,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 477348579,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 191835287,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1114798762,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1159259737,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 416319954,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 432670122,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 401784258,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 584841400,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1223671663,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1101436684,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 558995903,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 484373047,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 571432193,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 328663195,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1026394022,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1710454782,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 731287209,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 298538331,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 619711197,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 290748259,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 307543367,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 985769719,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1149164342,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 787328739,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1784809573,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1739806304,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 171145520,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1502719004,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 60400372,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 507909582,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1637679516,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1852854833,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 53966155,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1183912584,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 309132369,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 7116259,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 849642743,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1086375097,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1475331006,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1999053101,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 984038551,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2046646823,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1815122871,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2120459000,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1775195449,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2059138027,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1668177486,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2071168417,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1597828501,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1677006723,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 199792249,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1307740423,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1468365056,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 902651357,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 847712,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 599772153,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1029992139,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 748740932,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1935435868,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 45032740,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1448744317,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 738438130,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1086463191,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1058603395,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1249397995,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 63515662,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1123049280,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 376560105,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1201791903,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1487841429,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1998410202,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 587692917,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2122757024,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1483368002,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2010497909,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1783894637,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1131076513,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 610927511,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 673354643,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 120773280,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 306225390,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 192124302,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1702541237,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1516317426,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1661999559,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 762470021,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1459519762,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 854725137,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1582505268,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 431866841,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 715521243,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1941038360,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1255001708,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1355641669,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1848626886,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1436440024,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1608320429,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1027829525,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1543372809,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1344441494,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1727989628,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 338478551,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 152551622,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 549756845,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 32415756,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2146148808,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 939476068,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1597702772,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 114588957,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1048761398,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 563278209,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1493099295,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2095483940,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 351213791,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1022166802,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 404398685,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1391172790,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 216783571,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1688848247,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1222924959,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 290033135,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1650880573,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1047342585,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1784031607,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 211274112,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1455922541,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 383786478,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 134735951,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 151929347,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1575610574,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 217408174,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1078346867,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1971737468,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 759230086,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1441465482,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2074054685,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2124758466,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 128656697,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 788943129,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1641105720,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1558198371,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 949552593,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2063245175,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 626094491,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1682623026,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 154611885,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 84844919,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 219229528,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1398329548,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1864179424,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1425714499,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1840972084,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1587178594,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 547818589,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 156569897,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 704717131,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1765060213,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 600635384,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1987939596,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 317561239,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 874898784,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 191229689,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 2098422882,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 602289628,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 413321337,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1975925866,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1635433832,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1029548421,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1926234143,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1950278863,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1639454646,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 272552271,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 59998453,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 83099053,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 1187562687,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 70670820,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    },
+    {
+      "seed": 291104141,
+      "stratum": "bgy-usecase2-10ac",
+      "status": "unmaterialized"
+    }
+  ],
+  "replacement_policy": "ordered-technical-generation-failure-only",
+  "generation": {
+    "algorithm": "sha256-json-counter-v1",
+    "root": 2026101101,
+    "stream_id": [
+      0,
+      0,
+      0
+    ],
+    "cursor": 400,
+    "reserved_rejections": 0,
+    "duplicate_rejections": 0
+  },
+  "generation_sha256": "1d7310daefec5166c98b3ad802b43d30bf2216e3aa457ba7bcf80a2d0025fe40",
+  "published_validation": {
+    "path": "config/evaluation_seed_manifest.csv",
+    "sha256": "dcfd99f487460752bd17745421720b73cc3ab02d6b88b9f501b31e4feac5a05a"
+  },
+  "manifest_sha256": "1bdbbfd11f2e716ce358534c8484b046bc3f9d0b32d33553c476096f78f01e27"
+}

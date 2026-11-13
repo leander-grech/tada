@@ -1,0 +1,52 @@
+{
+  "baseline_source": {
+    "commit": "f1609cf37eef12cabc79132d4c4f20c0e7cb9e77",
+    "environment_ast_sha256": "2e848de4658a4dcd3df541aa7d08f44413697de42d5a8c58d59637b20512a94c",
+    "generation_preprocessing": {
+      "referenced_settings": {
+        "AUTO_SOLVE_TARGET_WINDOW_S": "Constant(value=60.0)",
+        "EPISODE_STEPS": "Constant(value=128)",
+        "TIME_BETWEEN_ACTIONS": "Constant(value=45)",
+        "TROMBONE_EXCLUSION_SHRINK_FACTOR": "Constant(value=0.8)"
+      },
+      "sources": {
+        "atc_env/environment.py": "49efe4db02eb37276211f85b130235b7e8a32932ce1d3938957969f454250647",
+        "simulator/auto_solve.py": "593c1d072f37d9dbf2ee5fc61f01de86673a7353342c9b324f213e6eee87fb92",
+        "simulator/simulator.py": "4dfbcec33da85e0d46194dba7a4014ba7deeb868917408440e2f3d1be0be944c"
+      }
+    },
+    "note": "Task 3 review-fix working tree; commit identifies parent and content hashes identify current baseline source. Amendment records existing initial window without changing conditions."
+  },
+  "benchmark": {
+    "early_auto_solve_target_window_s": 60.0,
+    "episode_steps": 128,
+    "preprocessing": "historical-route-exclusion-start-offset-early-auto-solve",
+    "start_offset_max_s": 45,
+    "stratum": {
+      "aircraft_count": 10,
+      "airport": "BGY",
+      "difficulty": "VALIDATION_USE_CASE_2",
+      "id": "bgy-usecase2-10ac",
+      "scenario_config_sha256": "37cd7677604e175a7227a113f65c81b9cd8abaf6eb6a5ccd6e4d7fd820f98ad9",
+      "weight": 1.0
+    }
+  },
+  "conditions_sha256": "571b5c24e8a1ff47c84d281517613cf579c136becffea5d8f4c24d4583316ddc",
+  "native_artifact": {
+    "extension_sha256": "21f8b23997290cda79c34cdf371936ba54a2a92d7f3b0a54d095229a0e853d9e",
+    "mode": "external",
+    "source_identity": null,
+    "source_provenance": "unverified external artifact; not attributed to checked-in Rust source",
+    "version": "0.2.80",
+    "wheel_sha256": "00880c2a3ece11eb78cc4d78c9feee7ad4c9ef656e038859ee11919dd075d9ec"
+  },
+  "physics": {
+    "horizontal_safezone_radius_nm": 5.0,
+    "simulator_timestep_ms": 1000,
+    "vertical_safezone_radius_ft": 1000.0
+  },
+  "previous_conditions_sha256": "f964e95a15c96bae2b67c6af4e9a84dd4e17e6e48ea9f034937c88abada9d35c",
+  "purpose": "campaign",
+  "reservation_sha256": "1bdbbfd11f2e716ce358534c8484b046bc3f9d0b32d33553c476096f78f01e27",
+  "version": 2
+}

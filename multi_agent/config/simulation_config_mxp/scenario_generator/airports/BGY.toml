@@ -1,0 +1,291 @@
+name = "BGY"
+num_approach_waypoints = 1
+position = { x = 34869.94, y = 25137.05 } # LIME relative to LIML
+validation_separation_nm = 10.0
+
+# Trombone pattern for BGY (LIME)
+# Coordinates are in meters relative to LIML position
+waypoints = [
+    { x = 63559.78, y = -43446.55, type = "fly-by", name = "ATMIP" },
+    { x = 52280.07, y = 15988.17, type = "fly-by", name = "AVHEB" },
+    { x = 74126.76, y = -31535.03, type = "fly-by", name = "BAPLU" },
+    { x = 51794.06, y = 21529.25, type = "fly-by", name = "BONXE" },
+    { x = 52719.12, y = 50731.41, type = "fly-by", name = "EKLIB" },
+    { x = 42603.19, y = -3341.65, type = "fly-by", name = "ELBOD" },
+    { x = 85528.92, y = -5925.98, type = "fly-by", name = "ELTAR" },
+    { x = 35329.62, y = -34897.55, type = "fly-by", name = "ITVUN" },
+    { x = 56836.88, y = 19295.31, type = "fly-by", name = "LASAV" },
+    { x = 86058.10, y = 21217.42, type = "fly-by", name = "ME502" },
+    { x = 65689.05, y = 18988.87, type = "fly-by", name = "ME503" },
+    { x = 60220.53, y = 18375.99, type = "fly-by", name = "ME504" },
+    { x = 20863.37, y = 19267.17, type = "fly-by", name = "ME531" },
+    { x = 10213.92, y = 22055.72, type = "fly-by", name = "ME532" },
+    { x = 12560.48, y = 31032.71, type = "fly-by", name = "ME533" },
+    { x = 19392.08, y = 29246.03, type = "fly-by", name = "ME534" },
+    { x = 37730.81, y = 24408.27, type = "fly-by", name = "ME536" },
+    { x = 44740.30, y = 25350.47, type = "fly-by", name = "ME561" },
+    { x = 52163.11, y = 25086.08, type = "fly-by", name = "ME565" },
+    { x = 71593.67, y = -6124.19, type = "fly-by", name = "ME616" },
+    { x = 66117.78, y = -11558.44, type = "fly-by", name = "ME620" },
+    { x = 59130.04, y = -14789.80, type = "fly-by", name = "ME624" },
+    { x = 51465.76, y = -15468.23, type = "fly-by", name = "ME628" },
+    { x = 44046.42, y = -13410.67, type = "fly-by", name = "ME632" },
+    { x = 50770.15, y = -23176.79, type = "fly-by", name = "ME732" },
+    { x = 38843.00, y = -26318.17, type = "fly-by", name = "ME740" },
+    { x = 39221.62, y = 33133.24, type = "fly-by", name = "ME760" },
+    { x = 40339.68, y = 34601.73, type = "fly-by", name = "ME761" },
+    { x = 44844.23, y = 40508.78, type = "fly-by", name = "ME765" },
+    { x = 48229.20, y = 44938.06, type = "fly-by", name = "ME768" },
+    { x = 25648.49, y = 30531.15, type = "fly-by", name = "ME860" },
+    { x = 24050.92, y = 31487.88, type = "fly-by", name = "ME861" },
+    { x = 17688.85, y = 35318.20, type = "fly-by", name = "ME865" },
+    { x = 6521.47, y = 42005.41, type = "fly-by", name = "ME872" },
+    { x = 33615.26, y = 25715.47, type = "fly-by", name = "OBFUL" },
+    { x = 45245.66, y = 965.36, type = "fly-by", name = "ODAMO" },
+    { x = 40898.53, y = 11577.10, type = "fly-by", name = "OGVON" },
+    { x = 65431.51, y = 23473.50, type = "fly-by", name = "OSKOR" },
+    { x = 52975.81, y = 8045.95, type = "fly-by", name = "TIXUM" },
+    { x = 68849.41, y = 9550.43, type = "fly-by", name = "ULSOP" },
+    { x = 74750.00, y = 3382.39, type = "fly-by", name = "ULVUN" },
+    { x = 71046.62, y = -7423.79, type = "fly-by", name = "VAGUX" },
+]
+
+[[runways]]
+id = "10"
+heading = 100.0
+
+# South: ME632 – TIXUM
+[[runways.patterns]]
+name = "DIXER 4E"
+validation_scenario = true
+spawn_point = "AMOXI"
+route = [
+    { name = "DIXER", max_altitude = 16000, speed = 250 },
+    { name = "ITVUN", min_altitude = 6000, speed = 230 },
+    { name = "ME740", max_altitude = 12000, min_altitude = 6000 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME628", min_altitude = 6000, speed = 220 },
+    { name = "ME624", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME620", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME616", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "DIXER", max_altitude = 16000, speed = 250 },
+    { name = "ITVUN", min_altitude = 6000, speed = 230 },
+    { name = "ME740", max_altitude = 12000, min_altitude = 6000 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+# North: OGVON – ME632 – TIXUM
+[[runways.patterns]]
+name = "EKLIB 4E"
+validation_scenario = true
+spawn_point = "LUSIL"
+route = [
+    { name = "EKLIB", max_altitude = 15000, speed = 250 },
+    { name = "ME768", min_altitude = 13000 },
+    { name = "ME760", min_altitude = 11000 },
+    { name = "OBFUL", min_altitude = 9000 },
+    { name = "OGVON", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME628", min_altitude = 6000, speed = 220 },
+    { name = "ME624", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME620", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME616", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "EKLIB", max_altitude = 15000, speed = 250 },
+    { name = "ME768", min_altitude = 13000 },
+    { name = "ME760", min_altitude = 11000 },
+    { name = "OBFUL", min_altitude = 9000 },
+    { name = "OGVON", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+[[runways.patterns]]
+name = "ELBOD 1E"
+route = [
+    { name = "ELBOD" },
+    { name = "ME632", min_altitude = 6000, speed = 220 },
+    { name = "ME628", min_altitude = 6000, speed = 220 },
+    { name = "ME624", min_altitude = 6000, speed = 220 },
+    { name = "ME620", min_altitude = 6000, speed = 220 },
+    { name = "ME616", min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "ME632", min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+[[runways.patterns]]
+name = "ODAMO 4E"
+route = [
+    { name = "ODAMO" },
+    { name = "ME632", min_altitude = 6000, speed = 220 },
+    { name = "ME628", min_altitude = 6000, speed = 220 },
+    { name = "ME624", min_altitude = 6000, speed = 220 },
+    { name = "ME620", min_altitude = 6000, speed = 220 },
+    { name = "ME616", min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "ODAMO" },
+    { name = "ME632", min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+[[runways.patterns]]
+name = "ODINA 4E"
+route = [
+    { name = "ODINA" },
+    { name = "ME872", min_altitude = 13000, speed = 250 },
+    { name = "ME865", min_altitude = 11000 },
+    { name = "OBFUL", min_altitude = 9000 },
+    { name = "OGVON", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME628", min_altitude = 6000, speed = 220 },
+    { name = "ME624", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME620", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME616", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "ODINA" },
+    { name = "ME872", min_altitude = 13000, speed = 250 },
+    { name = "ME865", min_altitude = 11000 },
+    { name = "OBFUL", min_altitude = 9000 },
+    { name = "OGVON", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+# South-East: ATMIP – TIXUM
+[[runways.patterns]]
+name = "OSBUL 4E"
+validation_scenario = true
+spawn_point = "OSBUL"
+route = [
+    { name = "OSBUL", speed = 250 },
+    { name = "ATMIP", min_altitude = 6000, speed = 230 },
+    { name = "ME732", max_altitude = 12000, min_altitude = 6000, speed = 220 },
+    { name = "ME628", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME624", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME620", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME616", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "ATMIP", min_altitude = 6000, speed = 230 },
+    { name = "ME732", max_altitude = 12000, min_altitude = 6000, speed = 220 },
+    { name = "ME628", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+[[runways.patterns]]
+name = "OSKOR 4E"
+route = [
+    { name = "OSKOR", speed = 250 },
+    { name = "ME760", min_altitude = 11000 },
+    { name = "OBFUL", min_altitude = 9000 },
+    { name = "OGVON", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME628", min_altitude = 6000, speed = 220 },
+    { name = "ME624", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME620", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ME616", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "ULVUN", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+aman_route = [
+    { name = "OSKOR", speed = 250 },
+    { name = "ME760", min_altitude = 11000 },
+    { name = "OBFUL", min_altitude = 9000 },
+    { name = "OGVON", max_altitude = 9000, min_altitude = 6000, speed = 230 },
+    { name = "ME632", max_altitude = 9000, min_altitude = 6000, speed = 220 },
+    { name = "TIXUM", max_altitude = 6000, min_altitude = 6000, speed = 210 },
+    { name = "AVHEB", min_altitude = 4000, speed = 200 },
+    { name = "BONXE", min_altitude = 3400, speed = 175 },
+]
+
+[[runways]]
+id = "28"
+heading = 280.0
+
+[[runways.patterns]]
+name = "EKLIB 3K"
+route = [
+    { name = "EKLIB", speed = 250 },
+    { name = "ME768", min_altitude = 13000 },
+    { name = "ME765", min_altitude = 11000 },
+    { name = "ME761", min_altitude = 9000 },
+    { name = "OBFUL", min_altitude = 6000 },
+    { name = "ME531", speed = 200 },
+    { name = "ME532", min_altitude = 5000, speed = 200 },
+    { name = "ME533", min_altitude = 4000, speed = 200 },
+    { name = "ME534", min_altitude = 3500, speed = 175 },
+]
+
+
+[[runways.patterns]]
+name = "NOBMI 3K"
+route = [
+    { name = "NOBMI", speed = 250 },
+    { name = "ME565", min_altitude = 11000, speed = 250 },
+    { name = "ME561", min_altitude = 9000 },
+    { name = "OBFUL", min_altitude = 6000 },
+    { name = "ME531", speed = 200 },
+    { name = "ME532", min_altitude = 5000, speed = 200 },
+    { name = "ME533", min_altitude = 4000, speed = 200 },
+    { name = "ME534", min_altitude = 3500, speed = 175 },
+]
+
+[[runways.patterns]]
+name = "ODINA 5S"
+route = [
+    { name = "ODINA", speed = 250 },
+    { name = "ME872", min_altitude = 13000, speed = 250 },
+    { name = "ME865", min_altitude = 11000 },
+    { name = "ME861", min_altitude = 9000 },
+    { name = "OBFUL", min_altitude = 6000 },
+    { name = "ME531", speed = 200 },
+    { name = "ME532", min_altitude = 5000, speed = 200 },
+    { name = "ME533", min_altitude = 4000, speed = 200 },
+    { name = "ME534", min_altitude = 3500, speed = 175 },
+]

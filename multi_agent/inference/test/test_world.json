@@ -1,0 +1,367 @@
+{
+  "aircraft": [
+    {
+      "call_sign": "TEST001",
+      "start_time_s": 0.0,
+      "under_control": false,
+      "inside_airspace": true,
+      "following_route": true,
+      "arrival_checked": false,
+      "aircraft_type": "A320",
+      "route": [
+        {
+          "waypoint_name": "OSBUL",
+          "position_m": [79225.55, -68587.72],
+          "waypoint_type": "FlyBy",
+          "min_altitude": null,
+          "max_altitude": null,
+          "target_speed": 128.6,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ATMIP",
+          "position_m": [63579.28999999999, -43226.133],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": null,
+          "target_speed": 118.312,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ME732",
+          "position_m": [50642.676, -23203.39],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": 3657.6000000000004,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ME628",
+          "position_m": [51132.984, -15710.195000000002],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": null,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ME624",
+          "position_m": [59006.824, -14577.019],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": 2743.2000000000003,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ME620",
+          "position_m": [66378.734, -11525.067],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": 2743.2000000000003,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ME616",
+          "position_m": [71603.37, -6424.509],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": 2743.2000000000003,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ULVUN",
+          "position_m": [74863.62, 3681.3977],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": 2743.2000000000003,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "TIXUM",
+          "position_m": [52645.273, 7905.9529999999995],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1828.8000000000002,
+          "max_altitude": null,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "AVHEB",
+          "position_m": [51938.38, 15650.691],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": null,
+          "target_speed": 102.88,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "BONXE",
+          "position_m": [51726.652, 21210.953],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1036.3200000000002,
+          "max_altitude": null,
+          "target_speed": 90.02,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "BGY_10_APP00",
+          "position_m": [40303.844, 23978.678],
+          "waypoint_type": "FlyOver",
+          "min_altitude": null,
+          "max_altitude": 1066.8,
+          "target_speed": 87.448,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "BGY",
+          "position_m": [34869.94, 25137.05],
+          "waypoint_type": "FlyBy",
+          "min_altitude": null,
+          "max_altitude": null,
+          "target_speed": null,
+          "hold_plan": null
+        }
+      ],
+      "route_name": "OSBUL 4E",
+      "runway_id": "10",
+      "mission": {
+        "completed": false,
+        "failed": false,
+        "aircraft_horizontal_safezone_radius": 9260.0,
+        "aircraft_vertical_safezone_radius": 304.8
+      },
+      "final_fix_m": [34869.94, 25137.05],
+      "size_scale": 1.0,
+      "manually_updated_speed": false,
+      "state": {
+        "position_m": [79018.22, -68431.945, 9387.84],
+        "velocity_m_s": [-106.96696, 176.33354, 0.0]
+      },
+      "target_state": {
+        "heading": null,
+        "speed": 180.04,
+        "altitude": 9387.84
+      },
+      "hold_state": null,
+      "aman": {
+        "time_to_gain": 0.0,
+        "time_to_lose": 30
+      }
+    },
+    {
+      "call_sign": "TEST002",
+      "start_time_s": 38.516235,
+      "under_control": false,
+      "inside_airspace": true,
+      "following_route": true,
+      "arrival_checked": false,
+      "aircraft_type": "A320",
+      "route": [
+        {
+          "waypoint_name": "AKASU",
+          "position_m": [-60874.484, 74636.83],
+          "waypoint_type": "FlyBy",
+          "min_altitude": null,
+          "max_altitude": null,
+          "target_speed": null,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "RIXUV",
+          "position_m": [-52176.81, 50922.047],
+          "waypoint_type": "FlyBy",
+          "min_altitude": null,
+          "max_altitude": null,
+          "target_speed": 128.6,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC685",
+          "position_m": [-40470.312, 36502.113],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 3657.6000000000004,
+          "max_altitude": null,
+          "target_speed": null,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "EVGIR",
+          "position_m": [-32407.611000000004, 21659.729],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 2743.2000000000003,
+          "max_altitude": 3352.8,
+          "target_speed": 118.312,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC768",
+          "position_m": [-29124.941, 7290.768],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 2743.2000000000003,
+          "max_altitude": null,
+          "target_speed": 118.312,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC761",
+          "position_m": [-26295.371, -5673.287],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": 1828.8000000000002,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC756",
+          "position_m": [-24719.182, -14456.373],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": 1828.8000000000002,
+          "target_speed": 113.16799999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "ESITE",
+          "position_m": [-23109.357, -24114.586],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": 1828.8000000000002,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC746",
+          "position_m": [-21640.617, -32970.613],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": 1828.8000000000002,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC741",
+          "position_m": [-19814.27, -42181.902],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": 1828.8000000000002,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC435",
+          "position_m": [-30273.072000000004, -43782.582],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": 1524.0,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC430",
+          "position_m": [-32489.220000000005, -34731.62],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": null,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC425",
+          "position_m": [-33870.934, -25769.293],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": null,
+          "target_speed": 108.02399999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MC420",
+          "position_m": [-35987.48, -16565.111],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": null,
+          "target_speed": 102.88,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "INLER",
+          "position_m": [-37646.3, -7395.423],
+          "waypoint_type": "FlyBy",
+          "min_altitude": 1219.2,
+          "max_altitude": null,
+          "target_speed": 97.73599999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MXP_35L_APP00",
+          "position_m": [-40708.832, 7993.4336],
+          "waypoint_type": "FlyOver",
+          "min_altitude": null,
+          "max_altitude": 1219.2,
+          "target_speed": 97.73599999999999,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MXP_35L_APP01",
+          "position_m": [-41856.297, 13429.651],
+          "waypoint_type": "FlyOver",
+          "min_altitude": null,
+          "max_altitude": 1066.8,
+          "target_speed": 87.448,
+          "hold_plan": null
+        },
+        {
+          "waypoint_name": "MXP",
+          "position_m": [-43003.76, 18865.87],
+          "waypoint_type": "FlyBy",
+          "min_altitude": null,
+          "max_altitude": null,
+          "target_speed": null,
+          "hold_plan": null
+        }
+      ],
+      "route_name": "RIXUV 3E",
+      "runway_id": "35L",
+      "mission": {
+        "completed": false,
+        "failed": false,
+        "aircraft_horizontal_safezone_radius": 9260.0,
+        "aircraft_vertical_safezone_radius": 304.8
+      },
+      "final_fix_m": [-43003.76, 18865.87],
+      "size_scale": 1.0,
+      "manually_updated_speed": false,
+      "state": {
+        "position_m": [-61081.836, 74684.06, 9204.96],
+        "velocity_m_s": [74.28284, -191.20651, 0.0]
+      },
+      "target_state": {
+        "heading": null,
+        "speed": 180.04,
+        "altitude": 9204.96
+      },
+      "hold_state": null,
+      "aman": {
+        "time_to_gain": 10,
+        "time_to_lose": 0.0
+      }
+    }
+  ],
+  "arrival_targets": [
+    {
+      "ac_callsign": "TEST001",
+      "eta_s": 886.8534
+    },
+    {
+      "ac_callsign": "TEST002",
+      "eta_s": 1468.4453
+    }
+  ],
+  "age_in_steps": 0,
+  "age_in_seconds": 0.0
+}

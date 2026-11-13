@@ -1,0 +1,15 @@
+# Exclude large result files from Ray working directory uploads
+ray_results/
+videos/
+*.db
+mlruns/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv-cache/
+*.egg-info/
+AGENTS.md
+AGENTS.override.md

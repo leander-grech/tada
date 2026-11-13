@@ -1,0 +1,40 @@
+# Python and native build output
+__pycache__/
+*.py[cod]
+.venv/
+.venv*/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+# Local configuration
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+# Runtime outputs
+**/runs/
+**/ray_results/
+**/tb_logs/
+**/experiments/
+**/videos/
+**/inference-scenarios/
+**/evaluation_reports/
+**/events.out.tfevents.*
+*.log
+mlruns/
+mlflow.db*
+# Generated sector catalogs
+multi_agent/static/sector_catalog/tada_sector_catalog.json
+single-agent/static/sector_catalog/tada_sector_catalog.json
+# Licensed aircraft performance data (supplied locally; see docs/aircraft-designs.md)
+**/simulation_config_*/designs/*.json
+# Local agent instructions
+AGENTS.md
+AGENTS.override.md

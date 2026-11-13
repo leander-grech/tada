@@ -1,0 +1,118 @@
+[project]
+name = "TADA-trainer"
+version = '0.0.1'
+readme = "README.md"
+
+requires-python = ">=3.12,<3.13"
+
+dependencies = [
+    "imageio[ffmpeg]~=2.37.0",
+    "matplotlib~=3.10.3",
+    "mlflow~=3.10.1",
+    "tensorboard~=2.20.0",
+    "ray[rllib]~=2.53.0",
+    "torch==2.8.0",
+    "torch-geometric~=2.6.1",
+    "python-dotenv~=1.0.1",
+    "numpy~=1.26.4",
+    "fastapi~=0.115.0",
+    "uvicorn[standard]~=0.34.0",
+    "python-multipart~=0.0.22",
+    "flight-simulator>=0.2.1",
+    "dm-tree~=0.1.10",
+    "gymnasium~=1.1.1",
+    "pandas~=2.3.3",
+    "psutil~=7.2.2",
+    "pyarrow~=23.0.1",
+    "pydantic~=2.13.3",
+    "starlette~=0.46.2",
+    "threadpoolctl~=3.6.0",
+]
+
+[build-system]
+requires = ["setuptools>=80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+cpu = ["torch==2.8.0"]
+cuda = ["torch==2.8.0; sys_platform != 'darwin'"]
+dev = ["pytest", "ruff", "pyright", "types-tqdm"]
+
+[project.scripts]
+train = "main:train_main"
+test = "pytest:main"
+evaluate = "scripts.evaluate:main"
+evaluate-report = "scripts.evaluate_report:main"
+compare-runs = "scripts.compare_runs:main"
+attempts-benchmark = "scripts.attempts_benchmark:main"
+density-plots = "scripts.density_plots:main"
+record = "scripts.record_callback:main"
+mlflow-ui = "scripts.mlflow_ui:main"
+inference-server = "inference.server:main"
+
+[tool.pytest.ini_options]
+testpaths = ["test", "inference/test"]
+norecursedirs = ["runs", ".venv"]
+python_files = ["*_test.py", "test_*.py"]
+
+[tool.uv]
+package = true
+conflicts = [[{ extra = "cpu" }, { extra = "cuda" }]]
+
+[tool.uv.sources]
+flight-simulator = { path = "simulator/wheels/flight_simulator-0.2.80-cp312-cp312-manylinux_2_34_x86_64.whl" }
+torch = [
+    { index = "pytorch-cpu", extra = "cpu", marker = "sys_platform != 'darwin'" },
+    { index = "pytorch-cu128", extra = "cuda", marker = "sys_platform != 'darwin'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = ["test*", "docs*", "runs*", "ray_results*", "videos*", "node_modules*", "config.contracts*", "*.test*", "inference.test*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = [".venv", "build", "data", "runs", "ray_results", "TOOLING"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "T20"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"common/runtime_log.py" = ["T201"]
+"scripts/evaluate.py" = ["T201"]
+
+[tool.pyright]
+include = ["."]
+exclude = ["build", "runs", "ray_results", ".venv", "docs", "node_modules", "TOOLING", "**/__pycache__"]
+pythonVersion = "3.12"
+typeCheckingMode = "basic"
+# Pre-existing backlog (511 findings at adoption) stays visible as warnings.
+reportAttributeAccessIssue = "warning"
+reportArgumentType = "warning"
+reportIndexIssue = "warning"
+reportGeneralTypeIssues = "warning"
+reportOptionalMemberAccess = "warning"
+reportCallIssue = "warning"
+reportOptionalSubscript = "warning"
+reportPrivateImportUsage = "warning"
+reportAssignmentType = "warning"
+reportTypedDictNotRequiredAccess = "warning"
+reportOptionalCall = "warning"
+reportOperatorIssue = "warning"
+reportReturnType = "warning"

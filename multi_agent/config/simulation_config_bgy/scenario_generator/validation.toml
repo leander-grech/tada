@@ -1,0 +1,75 @@
+# Validation Scenario Configuration
+# This file defines deterministic settings for validation scenarios
+# Used to create repeatable test cases with controlled aircraft sequencing
+
+[validation]
+# Time when the first aircraft should land (in seconds from scenario start)
+first_landing_time_s = 900
+
+# Exact separation between subsequent aircraft landings (in seconds)
+# Each aircraft lands exactly aircraft_separation_s after the previous one
+aircraft_separation_s = 200
+
+# Random variance added to each aircraft's target landing time (in seconds)
+# Applied as ±target_time_variance_s to add realistic variation
+target_time_variance_s = 20
+
+# Random noise added to aircraft spawn time (in seconds)
+# Negative values make aircraft spawn earlier, positive values spawn later
+separation_noise_min_s = -600 # Can spawn up to 600s earlier
+separation_noise_max_s = 0    # Can spawn up to 0s later
+
+# Speed range at which aircraft spawn at their spawn points (in knots)
+# Actual spawn speed is randomized between min and max
+spawn_speed_min_knots = 375
+spawn_speed_max_knots = 425
+
+# Altitude range at which aircraft spawn at their spawn points (in feet)
+# Actual spawn altitude is randomized between min and max
+spawn_altitude_min_feet = 39000
+spawn_altitude_max_feet = 41000
+
+# ============================================================================
+# Use Case 1: MXP Trombone Pattern Validation
+# ============================================================================
+[validation.use_case_1_mxp]
+description = "MXP trombone pattern with aircraft 3 delayed & 4 early"
+
+# Which aircraft positions to delay (1-indexed: 1 = TEST001, 2 = TEST002, etc.)
+delayed_aircraft = [3]
+# Delay amount in seconds (added to their target time)
+delay_amount_s = 120
+
+# Which aircraft positions to make early (1-indexed)
+early_aircraft = [4]
+# Early amount in seconds (subtracted from their target time)
+early_amount_s = 120
+
+# ============================================================================
+# Use Case 2: BGY Point Merge System Validation
+# ============================================================================
+[validation.use_case_2_bgy]
+description = "BGY point merge system with 5 aircraft - varied PMS trajectories"
+
+# Flight 3 needs to lose 2 minutes (flies complete PMS route)
+delayed_aircraft = [3]
+delay_amount_s = 120
+
+# Flight 4 needs to gain 2 minutes (early DCT TO from PMS)
+early_aircraft = [4]
+early_amount_s = 120
+
+# ============================================================================
+# Use Case 3: Combined MXP/BGY Validation
+# ============================================================================
+[validation.use_case_3_combined]
+description = "Combined scenario with both airports - 10 aircraft total"
+
+# First 5 aircraft: MXP Trombone (same as Use Case 1)
+# Aircraft 3 delayed, Aircraft 4 early
+delayed_aircraft = [3, 8] # MXP aircraft 3, BGY aircraft 3 (index 8 overall)
+delay_amount_s = 120
+
+# Aircraft 4 (MXP) and 9 (BGY aircraft 4) need to be early
+early_aircraft = [4, 9] # MXP aircraft 4, BGY aircraft 4 (index 9 overall)
+early_amount_s = 120

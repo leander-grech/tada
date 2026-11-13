@@ -1,0 +1,96 @@
+[poisson_generation]
+# Use Poisson-based airplane generation with related simple AMAN calculation, using parameters defined by following fields; if false, use old-style scenario generation
+use_poisson_airplane_generation = true
+# Aircraft speed at last approach route point (e.g. INLER)
+aircraft_speed_at_end_knots = 190
+# Extra margin time between (landing) planes, in addition to what is determined by aircraft_speed_at_end_knots and (Mission) aircraft_horizontal_safezone_radius_nm
+extra_margin_between_planes_s = 30
+# Use random frequency for aircraft creation, with higher frequency when small number of planes is used (in training); otherwise frequency is defined by margin between planes
+use_random_frequency = false
+# For AMAN times use random extra TTL for AMAN for planes with no TTG, with more for small number of planes
+aman_use_random_extra_ttl = true
+# AMAN maximum time to gain (TTG) in seconds
+aman_ttg_max_s = 120
+# Altitude where planes start at spawn point, if not specified in pattern validation_spawn_altitude_ft (hard-coded 30000 ft used if neither given)
+default_start_altitude_ft = 20000
+# Optional config for creating planes in batches: maximum number of planes in a batch, 0 or not set means no batching
+max_batch_size = 0
+# Optional random drift for airplanes: do not aim exactly at waypoint but instead to random offset from it instead (in meters, corresponds to standard deviation)
+random_drift_scale_m = 0.0
+
+# Parameters when random frequency used
+[poisson_generation.random_frequency]
+# Ratio of max to min frequency
+max_to_min_ratio = 3.0
+# Scaling factor for number of airplanes, with smaller value resulting in higher frequency for a fixed number of airplanes
+airplane_num_scaling_factor = 0.15
+# Shift factor for number of airplanes, with positive value causing smaller number to behave like a larger number, i.e. less frequency, and negative vice versa
+airplane_num_shift_factor = 0.0
+# Exponent for number of planes in frequency, bigger value increses frequency more steeply towards small number of planes
+airplane_num_exponent = 3.0
+
+# Parameters when random extra TTL (Time To Lose) is used
+[poisson_generation.random_extra_ttl]
+# Largest possible scale value (theoretically for 1 plane) for random gamma distribution for extra TTL
+extra_scale_limit = 1000.0
+# Exponent for number of planes, bigger value produces on average smaller extra TTL for a large number of planes
+airplane_num_exponent = 1.6
+# Shape factor for gamma distribution, bigger value shifts peak of distribution towards larger values
+gamma_shape_factor = 1.5
+# Maximum possible extra TTL value (should not exceed time delay that is possible to create e.g. by route extension)
+max_extra_ttl_s = 650
+
+# Optional preferred altitudes config
+[poisson_generation.preferred_altitude_fraction]
+# Use different preferred altitudes for aircraft between waypoint min and max levels, and at start point, rotated according to plane number, with this many levels (e.g. 3 for BGY point merge approach)
+num_levels = 0
+# Level delta to separate airplanes at start point
+start_altitude_difference_ft = 1500
+
+[general]
+# Minimum distance between aircraft at spawn in nautical miles
+min_spawn_separation_nm = 5.0
+
+[aman]
+landing_time_difference_min_s = 90
+landing_time_difference_max_s = 600
+first_landing_time_min_s = 600
+first_landing_time_max_s = 660
+# Probability of an aircraft being delayed
+delay_probability = 0.2
+# Probability of an aircraft being early
+early_probability = 0.2
+# Delay time range in seconds
+delay_min_s = 60
+delay_max_s = 180
+# Early time range in seconds
+early_min_s = 60
+early_max_s = 120
+# Maximum number of aircraft that can be delayed per airport
+max_delayed_planes = 999
+# Maximum number of aircraft that can be early per airport
+max_early_planes = 999
+
+[waypoints]
+common = [
+    { x = -61195.95, y = 74738.57, type = "fly-by", name = "AKASU" },
+    { x = 6868.16, y = -93601.21, type = "fly-by", name = "AMOXI" },
+    { x = -77230.03, y = -55288.72, type = "fly-by", name = "ASTIG" },
+    { x = -41560.13, y = -82623.89, type = "fly-by", name = "DEVOX" },
+    { x = 2941.01, y = -40075.13, type = "fly-by", name = "DIXER" },
+    { x = 11858.54, y = -161784.40, type = "fly-by", name = "IDONA" },
+    { x = 65428.93, y = 67317.35, type = "fly-by", name = "LUSIL" },
+    { x = -8384.98, y = -75542.74, type = "fly-by", name = "MEBUR" },
+    { x = 95847.87, y = 23346.15, type = "fly-by", name = "NOBMI" },
+    { x = -119017.73, y = -180214.01, type = "fly-by", name = "NOSTA" },
+    { x = -47960.76, y = 74151.03, type = "fly-by", name = "ODINA" },
+    { x = 43949.05, y = 22872.26, type = "fly-by", name = "ORI" },
+    { x = -20101.51, y = 23129.63, type = "fly-by", name = "SRN" },
+    { x = -110708.00, y = -57113.13, type = "fly-by", name = "TOP" },
+    { x = 17803.59, y = 13451.07, type = "fly-by", name = "TZO" },
+    { x = 79225.55, y = -68587.72, type = "fly-by", name = "OSBUL" },
+]
+
+# List of airports to include
+[airports_list]
+include = ["MXP", "LIN", "BGY"]

@@ -1,0 +1,63 @@
+{
+  "baseline_source": {
+    "commit": "e1b970f69dbebb141ca6747320661f264782bd48",
+    "environment_ast_sha256": "d144f1fad47091216d9c5f1d63337669a38d6968e4335e13bf58323f32f4701a",
+    "generation_preprocessing": {
+      "sources": {
+        "simulator/simulator.py": "c38924cb486d9a54a7857072b62b58c53b967456342410ffbdfa240fb10c370c",
+        "simulator/auto_solve.py": "92ab4c1442d443b149331772c73f6d85886a10178b8c5b540e446d1fff78b92c",
+        "atc_env/environment.py": "bd4a4f6d234386d30fe8d72b84e8953efb774da2eb2d99d70dda9de4cc9f7820",
+        "atc_env/coverage_consumers.py": "f483d47fab7f9d002088e81f83e7c78df6e363e25b8e75b6a234bf3dc1fa8977",
+        "outcomes/evidence.py": "03b63a13894d059771f9231bef4c4b39bb72b15778d0eb2930058b777e4dba06",
+        "outcomes/native_contract.py": "e40faa8fdff7cf5f714a9f738f298db745467272ffa869abe358068a16b2e941",
+        "outcomes/ledger.py": "42ff395f3a47b922d4b6a9f798320450ba32d132b2eef2c1063b14a8d2f92c5b",
+        "atc_env/outcome_state.py": "6f0d025cc1ca78925315bd443761163a897a1c6b84b1529628766d003a2c04a4",
+        "utils/infringement_utils.py": "67899e830d78a1f6b6669661ee97791588b990f90abd88e507879ca72aae0645"
+      },
+      "referenced_settings": {
+        "HORIZONTAL_SAFEZONE_RADIUS_NM": "Constant(value=5.0)",
+        "EPISODE_STEPS": "Constant(value=128)",
+        "VERTICAL_SAFEZONE_RADIUS_FT": "Constant(value=1000.0)",
+        "HORIZONTAL_CONFLICT_RADIUS_NM": "Constant(value=3.0)",
+        "get_initial_training_aircraft_count": "not-defined",
+        "AUTO_SOLVE_TARGET_WINDOW_S": "Constant(value=60.0)",
+        "TIME_BETWEEN_ACTIONS": "Constant(value=45)",
+        "VERTICAL_CONFLICT_RADIUS_FT": "Constant(value=500.0)",
+        "TROMBONE_EXCLUSION_SHRINK_FACTOR": "Constant(value=0.8)"
+      }
+    },
+    "note": "Task17 MXP isolated generator baseline; commit identifies parent, hashes identify Task17 executable preprocessing. External native source equivalence is not claimed."
+  },
+  "benchmark": {
+    "early_auto_solve_target_window_s": 60.0,
+    "episode_steps": 128,
+    "preprocessing": "historical-route-exclusion-start-offset-early-auto-solve",
+    "start_offset_max_s": 45,
+    "stratum": {
+      "id": "mxp-usecase1-10ac",
+      "airport": "MXP",
+      "difficulty": "VALIDATION_USE_CASE_1",
+      "aircraft_count": 10,
+      "weight": 1.0,
+      "scenario_config_sha256": "bf78d4f64a90a5be405210a432bcf3f8959697a75f5edd1cbd943fb1754a5fb3"
+    }
+  },
+  "native_artifact": {
+    "extension_sha256": "21f8b23997290cda79c34cdf371936ba54a2a92d7f3b0a54d095229a0e853d9e",
+    "mode": "external",
+    "source_identity": null,
+    "source_provenance": "unverified external artifact; not attributed to checked-in Rust source",
+    "version": "0.2.80",
+    "wheel_sha256": "00880c2a3ece11eb78cc4d78c9feee7ad4c9ef656e038859ee11919dd075d9ec"
+  },
+  "physics": {
+    "horizontal_safezone_radius_nm": 5.0,
+    "simulator_timestep_ms": 1000,
+    "vertical_safezone_radius_ft": 1000.0
+  },
+  "previous_conditions_sha256": "c7e96d260b50455f008b6b41d25efdb0e2ccb99bb59f9f2aef5e399a2b831f72",
+  "purpose": "campaign",
+  "reservation_sha256": "de016723c0518f251e2a4fe9be6f57aca3258e82594afe0b0ed79aa885aec5e6",
+  "version": 2,
+  "conditions_sha256": "32a0545cb7eef338cada39a5bea4ba1765d8b4164d491b202ba475db2e16ab5a"
+}

@@ -1,0 +1,44 @@
+[project]
+name = "TADA-trainer"
+version = '0.0.1'
+readme = "README.md"
+
+requires-python = ">= 3.12"
+
+dynamic = ["dependencies"]
+
+[project.optional-dependencies]
+# Additional training, evaluation and plotting dependencies.
+train = [
+    "tensorboard~=2.20.0",
+    "matplotlib~=3.10.8",
+    "imageio[ffmpeg]~=2.37.0",
+]
+dev = ["isort", "black", "pylint", "mypy", "types-tqdm"]
+
+[tool.uv]
+package = true
+
+[tool.setuptools]
+py-modules = ["main", "main_jax", "render_policy"]
+
+packages = [
+    "actions",
+    "analysis",
+    "jax_ppo",
+    "evaluation",
+    "config",
+    "simulator",
+    "static",
+    "models",
+    "network",
+    "atc_env",
+    "utils",
+    "callbacks",
+]
+
+[tool.setuptools.package-data]
+config = ["*.txt", "training_seeds/*.txt", "simulation_config_*/designs/*.json", "simulation_config_*/scenario_generator/*.toml", "simulation_config_*/scenario_generator/airports/*.toml"]
+static = ["sector_catalog/*.json", "sector_source/tada_scenario_sectors/*.csv"]
+simulator = ["wheels/*.whl"]
+evaluation = ["*.txt"]
