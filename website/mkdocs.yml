@@ -1,5 +1,7 @@
 site_name: TADA · RL for arrival management
 site_description: "Single- and multi-agent reinforcement learning for time-based arrival management at Milan Malpensa (trombone) and Milan Bergamo (point merge): design, results and a lab to fly the published agents"
+# The published address. The deployment workflow sets SITE_URL; a local build or preview leaves it empty.
+site_url: !ENV [SITE_URL, ""]
 repo_url: https://github.com/monadoy/tada
 repo_name: monadoy/tada
 edit_uri: ""

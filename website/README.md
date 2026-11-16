@@ -15,6 +15,15 @@ mkdocs build --strict # static site in site/
 
 Run the commands from this directory (`website/`).
 
+## Publishing
+
+`.github/workflows/docs.yml` builds the site with `mkdocs build --strict` on every push to `main` that touches
+`website/`, and publishes it with GitHub Pages. Pull requests are built with the same checks and not published.
+
+One-time setup by a repository admin: Settings → Pages → Build and deployment → Source: **GitHub Actions**. The
+site is then served at `https://<owner>.github.io/<repository>/`. For a custom domain, set the repository variable
+`DOCS_SITE_URL` to the full address, ending in a slash.
+
 ## Layout
 
 | Path | What |
