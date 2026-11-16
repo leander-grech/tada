@@ -1,0 +1,4964 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Single- and multi-agent reinforcement learning for time-based arrival management at Milan Malpensa (trombone) and Milan Bergamo (point merge): design, results and a lab to fly the published agents">
+      
+      
+      
+        <link rel="canonical" href="https://leander-grech.github.io/tada/how/separation/">
+      
+      
+        <link rel="prev" href="../objective/">
+      
+      
+        <link rel="next" href="../search/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Separation rules - TADA · RL for arrival management</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/tada-components.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/theme.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/nav.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/site.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/lab.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#separation-rules" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TADA · RL for arrival management" class="md-header__button md-logo" aria-label="TADA · RL for arrival management" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zm7.18-5.73 4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.79-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.03-1.93-.5v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TADA · RL for arrival management
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Separation rules
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/monadoy/tada" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monadoy/tada
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TADA · RL for arrival management" class="md-nav__button md-logo" aria-label="TADA · RL for arrival management" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zm7.18-5.73 4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.79-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.03-1.93-.5v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43z"/></svg>
+
+    </a>
+    TADA · RL for arrival management
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/monadoy/tada" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monadoy/tada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zm7.18-5.73 4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.79-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.03-1.93-.5v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../results/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 17H7v-7h2zm4 0h-2V7h2zm4 0h-2v-4h2zm2 2H5V5h14v14.1M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16v-3c0-1.11-.89-2-2-2h-6V8h2V2H9v6h2v3H5c-1.11 0-2 .89-2 2v3H1v6h6v-6H5v-3h6v3H9v6h6v-6h-2v-3h6v3h-2v6h6v-6zM11 4h2v2h-2zM5 20H3v-2h2zm8 0h-2v-2h2zm8 0h-2v-2h2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    How it works
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How it works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../problem/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 2v2.07A8 8 0 0 0 4.07 11H2v2h2.07A8 8 0 0 0 11 19.93V22h2v-2.07A8 8 0 0 0 19.93 13H22v-2h-2.07A8 8 0 0 0 13 4.07V2m-2 4.08V8h2V6.09c2.5.41 4.5 2.41 4.92 4.91H16v2h1.91c-.41 2.5-2.41 4.5-4.91 4.92V16h-2v1.91C8.5 17.5 6.5 15.5 6.08 13H8v-2H6.09C6.5 8.5 8.5 6.5 11 6.08M12 11a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    The problem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environments/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 6h4v11H2zm5 13h10V4H7zM9 6h6v11H9zm9 0h4v11h-4z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Episodes and windowing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observations/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0 9.821 9.821 0 0 0-17.64 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Observations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 9a1 1 0 0 1 1-1 1 1 0 0 1 1 1v4.47l1.21.13 4.94 2.19c.53.24.85.77.85 1.35v4.36c-.03.82-.68 1.47-1.5 1.5H11c-.38 0-.74-.15-1-.43l-4.9-4.2.74-.77c.19-.21.46-.32.74-.32h.22L10 19zm1-4a4 4 0 0 1 4 4c0 1.5-.8 2.77-2 3.46v-1.22c.61-.55 1-1.35 1-2.24a3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .89.39 1.69 1 2.24v1.22C7.8 11.77 7 10.5 7 9a4 4 0 0 1 4-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions and reselection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 17c-.14 0-.26 0-.39.04L17.5 13.8c.45-.45.75-1.09.75-1.8a2.5 2.5 0 0 0-2.5-2.5c-.14 0-.25 0-.4.04L13.74 6.3c.47-.46.76-1.09.76-1.8a2.5 2.5 0 0 0-5 0c0 .7.29 1.34.76 1.79L8.65 9.54c-.15-.04-.26-.04-.4-.04a2.5 2.5 0 0 0-2.5 2.5c0 .71.29 1.34.75 1.79l-1.61 3.25C4.76 17 4.64 17 4.5 17a2.5 2.5 0 0 0 0 5A2.5 2.5 0 0 0 7 19.5c0-.7-.29-1.34-.76-1.79l1.62-3.25c.14.04.26.04.39.04s.25 0 .38-.04l1.63 3.25c-.47.45-.76 1.09-.76 1.79a2.5 2.5 0 0 0 5 0A2.5 2.5 0 0 0 12 17c-.13 0-.26 0-.39.04L10 13.8c.45-.45.75-1.09.75-1.8 0-.7-.29-1.33-.75-1.79l1.61-3.25c.13.04.26.04.39.04s.26 0 .39-.04L14 10.21a2.5 2.5 0 0 0 1.75 4.29c.13 0 .25 0 .38-.04l1.63 3.25c-.47.45-.76 1.09-.76 1.79a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-2.5-2.5m-15 3.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1m8.5-1c0 .55-.45 1-1 1s-1-.45-1-1 .45-1 1-1 1 .45 1 1M7.25 12c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1M11 4.5c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m3.75 7.5c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1m4.75 8.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Policy network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../objective/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85.98 1.5 1.83 1.83V20H2v2h20v-2h-9V8.82c.85-.32 1.5-.97 1.82-1.82h3.13L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.17C14.4 3.8 13.27 3 12 3m0 2a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-6.5 5.25L7 14H4zm13 0L20 14h-3z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Objective and reward
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 11h6V8l4 4-4 4v-3H9v3l-4-4 4-4zm-7 9V4h2v16zm18 0V4h2v16z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Separation rules
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 11h6V8l4 4-4 4v-3H9v3l-4-4 4-4zm-7 9V4h2v16zm18 0V4h2v16z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Separation rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#two-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two thresholds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#severity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Severity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#realised-and-predicted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Realised and predicted
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-ends-an-episode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What ends an episode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 13H7v5h5v2H5V10h2v1h5zM8 4v2H4V4zm2-2H2v6h8zm10 9v2h-4v-2zm2-2h-8v6h8zm-2 9v2h-4v-2zm2-2h-8v6h8z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Rollout search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi-agent/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5a3.5 3.5 0 0 0-3.5 3.5A3.5 3.5 0 0 0 12 12a3.5 3.5 0 0 0 3.5-3.5A3.5 3.5 0 0 0 12 5m0 2a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 12 10a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 12 7M5.5 8A2.5 2.5 0 0 0 3 10.5c0 .94.53 1.75 1.29 2.18.36.2.77.32 1.21.32s.85-.12 1.21-.32c.37-.21.68-.51.91-.87A5.42 5.42 0 0 1 6.5 8.5v-.28c-.3-.14-.64-.22-1-.22m13 0c-.36 0-.7.08-1 .22v.28c0 1.2-.39 2.36-1.12 3.31.12.19.25.34.4.49a2.482 2.482 0 0 0 1.72.7c.44 0 .85-.12 1.21-.32.76-.43 1.29-1.24 1.29-2.18A2.5 2.5 0 0 0 18.5 8M12 14c-2.34 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.66-3.5-7-3.5m-7.29.55C2.78 14.78 0 15.76 0 17.5V19h3v-1.93c0-1.01.69-1.85 1.71-2.52m14.58 0c1.02.67 1.71 1.51 1.71 2.52V19h3v-1.5c0-1.74-2.78-2.72-4.71-2.95M12 16c1.53 0 3.24.5 4.23 1H7.77c.99-.5 2.7-1 4.23-1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-agent approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lab/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1c0-.21-.07-.41-.18-.57L13 8.35V4h-2v4.35L5.18 18.43c-.11.16-.18.36-.18.57m1 3a3 3 0 0 1-3-3c0-.6.18-1.16.5-1.63L9 7.81V6a1 1 0 0 1-1-1V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1v1.81l5.5 9.56c.32.47.5 1.03.5 1.63a3 3 0 0 1-3 3zm7-6 1.34-1.34L16.27 18H7.73l2.66-4.61zm-.5-4a.5.5 0 0 1 .5.5.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5.5.5 0 0 1 .5-.5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    TADA Lab
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    TADA Lab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lab/access/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 18v4h-4v-3h-3v-3h-3l-2.26-2.26c-.55.17-1.13.26-1.74.26a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6c0 .61-.09 1.19-.26 1.74zM7 5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Request a key
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../code/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Use the code
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use the code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/evaluate/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-7 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M7 7h10V5h2v14H5V5h2zm.5 6.5L9 12l2 2 4.5-4.5L17 11l-6 6z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluate the models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/train/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM17 16l-5 2.72L7 16v-3.73L12 15l5-2.73z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Train a policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.81 2C4.83 2.09 4 3 4 4v16c0 1.05.95 2 2 2h12c1.05 0 2-.95 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H5.81M12 13h1a1 1 0 0 1 1 1v4h-1v-2h-1v2h-1v-4a1 1 0 0 1 1-1m0 1v1h1v-1zm3 1h3v1l-2 3h2v1h-3v-1l2-3h-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../notes/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Research notes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../notes/findings/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11h3v2h-3zM1 11h3v2H1zM13 1v3h-2V1zM4.92 3.5l2.13 2.14-1.42 1.41L3.5 4.93zm12.03 2.13 2.12-2.13 1.43 1.43-2.13 2.12zM12 6a6 6 0 0 1 6 6c0 2.22-1.21 4.16-3 5.2V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6 6 0 0 1 6-6m2 15v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1zm-3-3h2v-2.13c1.73-.44 3-2.01 3-3.87a4 4 0 0 0-4-4 4 4 0 0 0-4 4c0 1.86 1.27 3.43 3 3.87z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Findings
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Findings
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/reselection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reselection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/sequencing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequencing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/order-first/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Order first? (Phase 0)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/capacity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-capacity scenarios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/long-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Long streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/lookahead/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Search at inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/point-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Point merge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training from scratch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/findings/evaluation-noise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation noise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../notes/models/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 2c-.9 0-2 1-2 2H8c0-1-1.1-2-2-2H2v9c0 1 1 2 2 2h2.2c.4 2 1.7 3.7 4.8 4v2.08C8 19.54 8 22 8 22h8s0-2.46-3-2.92V17c3.1-.3 4.4-2 4.8-4H20c1 0 2-1 2-2V2zM6 11H4V4h2zm10 .5c0 1.93-.58 3.5-4 3.5-3.41 0-4-1.57-4-3.5V6h8zm4-.5h-2V4h2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Development runs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development runs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/best/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.94 19.5 12 17.77 9.06 19.5l.78-3.34-2.59-2.24 3.41-.29L12 10.5l1.34 3.13 3.41.29-2.59 2.24M20 2H4v2l4.86 3.64a8 8 0 1 0 6.28 0L20 4m-2 11a6 6 0 1 1-7.18-5.88 5.9 5.9 0 0 1 2.36 0A6 6 0 0 1 18 15m-5.37-8h-1.26l-4-3h9.34Z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Best development run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3_3" id="__nav_7_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windowed
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windowed
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_104/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_104
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_103/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_103
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_102/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_102
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_101
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_82
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_79/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_79
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_78/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_78
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_77/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_77
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_76/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_76
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_75/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_75
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_74/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_74
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_73/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_73
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_72/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_72
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_71/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_71
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_70/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_70
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_69/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_69
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_68/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_68
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_67/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_67
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_66/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_66
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_65/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_65
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_64/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_64
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_63/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_63
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_62/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_62
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_61/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_61
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_60/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_60
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_59/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_59
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_58
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_57
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_56
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_55
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_54
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_52
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_51
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_50
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_49
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_48
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_47/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_47
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_46/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_46
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_44/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_44
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_43/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_43
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_42
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_41/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_41
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_40/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_40
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_39/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_39
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_38/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_38
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_37/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_37
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_36/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_36
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_35/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_35
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_34/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_34
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_33
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_32
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_31
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3_4" id="__nav_7_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10-aircraft
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10-aircraft
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_30_pms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_30_pms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_29
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_28
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_27a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_27a
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_27
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_26
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_25
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_24_pms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_24_pms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_24
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_23
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_22
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_19
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_18
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_17
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_16_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_16_b
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_16_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_16_a
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/models/1_16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_16
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../notes/training/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.57 14.86 22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Training notes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Training notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/training/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference curves
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/training/distillation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Search distillation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/training/sac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discrete SAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/training/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/training/tensorboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TensorBoard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/evaluation/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.25 1.44 12.53.64 11 1.2c-.86.3-1.5.96-1.82 1.8H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-7 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M7 7h10V5h2v14H5V5h2zm10 4H7V9h10zm-2 4H7v-2h8z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation battery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/coverage/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 3h14a2 2 0 0 1 2 2v7.08a6 6 0 0 0-4.32.92H12v4h1.08c-.11.68-.11 1.35 0 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2m0 4v4h6V7zm8 0v4h6V7zm-8 6v4h6v-4zm13.75 8L15 18l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/log/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5 8H12v5l4.28 2.54.72-1.21-3.5-2.08zM13 3a9 9 0 0 0-9 9H1l3.96 4.03L9 12H6a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.9 8.9 0 0 0 13 21a9 9 0 0 0 9-9 9 9 0 0 0-9-9"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Experiment log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/progress/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3 14 .5.07L8.07 9.5a1.95 1.95 0 0 1 .52-1.91c.78-.79 2.04-.79 2.82 0 .53.52.7 1.26.52 1.91l2.57 2.57.5-.07c.18 0 .35 0 .5.07l3.57-3.57C19 8.35 19 8.18 19 8a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2c-.18 0-.35 0-.5-.07l-3.57 3.57c.07.15.07.32.07.5a2 2 0 0 1-2 2 2 2 0 0 1-2-2l.07-.5-2.57-2.57c-.32.07-.68.07-1 0L4.93 15.5 5 16a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress board
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/roadmap/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../notes/archive/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2zM3 3h18v6H3zm6.5 8h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5M5 5v2h14V5z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_10" id="__nav_7_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/archive/clearance-sets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22 clearances vs 15
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/archive/ten-aircraft-reward/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The 10-aircraft reward
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/archive/ten-aircraft-tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10-aircraft tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/archive/early-runs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Early runs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/archive/point-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Point merge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/renders/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.84 2.18-3.93.78 2.74 3.54 1.97-.4zm-6.87 1.36L12 3.93l2.75 3.53 1.96-.39zm-4.9.96-1.97.41 2.75 3.53 1.96-.39zm-4.91 1-.98.19a1.995 1.995 0 0 0-1.57 2.35L2 10l4.9-.97zM20 12v8H4v-8zm2-2H2v10a2 2 0 0 0 2 2h16c1.11 0 2-.89 2-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Renders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#two-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two thresholds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#severity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Severity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#realised-and-predicted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Realised and predicted
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-ends-an-episode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What ends an episode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    How it works
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+
+<h1 id="separation-rules">Separation rules<a class="headerlink" href="#separation-rules" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Summary</p>
+<p>Two aircraft are in an <strong>infringement</strong> when they are closer than 5 NM and 1000 ft, and in a
+<strong>conflict</strong> (a loss of separation) when they are closer than 3 NM and 500 ft. A conflict that
+actually happens in the live world ends the episode. A conflict or infringement that is only
+<em>predicted</em> by the do-nothing forecast ends nothing: it is graded by a <strong>severity</strong> between 0
+and 1 and fed to the reward shaping, the observation and the masks, so that the agent has a
+reason to resolve it before it happens.</p>
+</div>
+<p>Source: <code>single-agent/utils/infringement_utils.py</code>, <code>single-agent/actions/rewards.py</code>,
+<code>single-agent/atc_env/single_agent_env.py</code>, constants in <code>single-agent/config/config.py</code>.</p>
+<h2 id="two-thresholds">Two thresholds<a class="headerlink" href="#two-thresholds" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>horizontal separation</th>
+<th></th>
+<th>vertical separation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>infringement</strong></td>
+<td>closer than 5 NM</td>
+<td>and</td>
+<td>closer than 1000 ft</td>
+</tr>
+<tr>
+<td><strong>conflict</strong> = loss of separation</td>
+<td>closer than 3 NM</td>
+<td>and</td>
+<td>closer than 500 ft</td>
+</tr>
+</tbody>
+</table>
+<p>Both conditions must hold at the same moment. Two aircraft 2 NM apart horizontally but 1000 ft
+apart vertically are legally separated. A conflict is the severe case of an infringement: every
+conflict is also an infringement.</p>
+<p>Events are counted per pair of aircraft, not per time step. A pair contributes at most one
+infringement and at most one conflict to an episode, however long the encounter lasts. Only
+arrivals in the scenario are considered.</p>
+<h2 id="detection">Detection<a class="headerlink" href="#detection" title="Permanent link">&para;</a></h2>
+<p>Detection happens in two layers.</p>
+<p><strong>The simulator records proximity events.</strong> At each simulation step it checks every pair of active
+aircraft that are under control. When a pair is close enough, it records an event with the two
+callsigns, the time, and the horizontal and vertical separation. In the Python interface these
+events have the type <code>Infringement.LOSS_OF_SEPARATION</code>. The name is wider than the meaning: with
+the published settings an event is recorded for pairs out to 10 NM horizontally, twice the 5 NM
+safe-zone radius that the environment passes to the simulator
+(<code>Config.MISSION_SAFEZONE_RADIUS_NM</code>). An event is a record that two aircraft were near each other,
+not yet a finding that they were too near.</p>
+<p><strong>The environment grades each event.</strong> From the two separations stored in an event it computes:</p>
+<ul>
+<li>a <strong>severity</strong>, which is zero outside the infringement thresholds and reaches one at the
+  conflict thresholds. Severity is what the reward charges and what termination tests;</li>
+<li>a <strong>proximity</strong>, the same construction on a wider horizontal band that starts at 10 NM instead
+  of 5 NM. Proximity is what the policy observes, so that it can watch an encounter develop before
+  it costs anything (<a href="../observations/">Observations</a>).</li>
+</ul>
+<p>The same grading is applied to events in the live world and to events in the predicted world.</p>
+<h2 id="severity">Severity<a class="headerlink" href="#severity" title="Permanent link">&para;</a></h2>
+<p>Severity combines a horizontal ramp and a vertical ramp. With <code>h</code> the horizontal separation in NM
+and <code>v</code> the vertical separation in ft:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ramp_h   = clamp( (5 − h) / (5 − 3),          0, 1 )
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ramp_v   = clamp( (1000 − v) / (1000 − 500),  0, 1 )
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>severity = min(ramp_h, ramp_v) ²
+</code></pre></div>
+<ul>
+<li>Severity is <strong>0</strong> when <code>h ≥ 5 NM</code> or <code>v ≥ 1000 ft</code>: no infringement.</li>
+<li>Severity is <strong>1</strong> when <code>h ≤ 3 NM</code> and <code>v ≤ 500 ft</code>: a conflict.</li>
+<li>In between, the pair is in an infringement that is not a conflict, and severity says how deep.</li>
+</ul>
+<p>The minimum of the two ramps expresses "both must be small": a pair is only as severe as its
+better-separated axis allows. The square makes the measure convex. It is steepest just outside the
+conflict boundary, where a small gain in separation matters most, and it flattens to zero slope at
+the infringement boundary, so there is no kink for the policy to sit against at legal spacing.</p>
+<p>The figure shows severity over both separations, computed with the code's <code>pair_severity</code>. The
+fully coloured corner is a conflict.</p>
+<figure class="tada-fig-wrap"><svg class="tada-fig tada-heat" viewBox="0 0 640 300" role="img" aria-label="horizontal separation (NM) by vertical separation (ft)"><rect class="cell seq" x="58.0" y="252.8" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 0, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="252.8" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 0, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 0, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 0, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 0, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 0, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 0, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 0, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 0, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="252.8" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 0, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="252.8" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 0, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="252.8" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 0, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="252.8" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 0, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="252.8" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 0, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="249.6" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 20, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="249.6" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 20, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 20, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 20, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 20, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 20, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 20, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 20, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 20, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="249.6" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 20, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="249.6" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 20, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="249.6" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 20, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="249.6" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 20, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="249.6" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 20, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="246.4" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 40, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="246.4" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 40, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 40, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 40, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 40, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 40, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 40, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 40, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 40, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="246.4" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 40, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="246.4" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 40, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="246.4" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 40, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="246.4" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 40, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="246.4" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 40, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="243.3" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 60, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="243.3" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 60, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 60, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 60, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 60, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 60, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 60, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 60, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 60, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="243.3" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 60, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="243.3" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 60, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="243.3" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 60, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="243.3" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 60, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="243.3" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 60, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="240.1" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 80, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="240.1" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 80, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 80, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 80, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 80, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 80, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 80, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 80, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 80, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="240.1" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 80, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="240.1" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 80, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="240.1" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 80, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="240.1" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 80, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="240.1" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 80, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="236.9" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 100, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="236.9" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 100, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 100, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 100, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 100, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 100, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 100, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 100, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 100, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="236.9" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 100, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="236.9" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 100, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="236.9" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 100, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="236.9" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 100, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="236.9" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 100, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="233.7" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 120, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="233.7" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 120, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 120, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 120, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 120, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 120, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 120, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 120, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 120, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="233.7" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 120, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="233.7" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 120, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="233.7" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 120, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="233.7" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 120, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="233.7" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 120, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="230.5" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 140, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="230.5" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 140, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 140, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 140, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 140, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 140, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 140, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 140, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 140, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="230.5" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 140, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="230.5" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 140, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="230.5" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 140, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="230.5" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 140, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="230.5" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 140, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="227.3" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 160, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="227.3" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 160, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 160, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 160, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 160, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 160, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 160, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 160, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 160, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="227.3" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 160, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="227.3" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 160, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="227.3" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 160, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="227.3" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 160, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="227.3" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 160, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="224.2" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 180, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="224.2" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 180, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 180, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 180, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 180, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 180, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 180, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 180, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 180, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="224.2" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 180, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="224.2" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 180, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="224.2" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 180, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="224.2" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 180, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="224.2" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 180, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="221.0" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 200, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="221.0" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 200, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 200, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 200, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 200, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 200, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 200, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 200, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 200, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="221.0" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 200, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="221.0" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 200, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="221.0" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 200, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="221.0" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 200, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="221.0" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 200, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="217.8" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 220, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="217.8" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 220, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 220, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 220, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 220, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 220, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 220, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 220, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 220, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="217.8" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 220, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="217.8" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 220, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="217.8" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 220, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="217.8" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 220, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="217.8" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 220, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="214.6" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 240, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="214.6" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 240, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 240, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 240, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 240, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 240, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 240, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 240, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 240, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="214.6" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 240, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="214.6" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 240, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="214.6" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 240, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="214.6" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 240, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="214.6" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 240, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="211.4" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 260, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="211.4" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 260, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 260, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 260, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 260, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 260, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 260, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 260, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 260, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="211.4" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 260, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="211.4" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 260, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="211.4" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 260, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="211.4" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 260, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="211.4" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 260, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="208.2" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 280, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="208.2" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 280, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 280, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 280, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 280, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 280, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 280, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 280, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 280, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="208.2" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 280, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="208.2" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 280, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="208.2" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 280, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="208.2" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 280, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="208.2" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 280, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="205.1" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 300, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="205.1" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 300, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 300, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 300, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 300, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 300, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 300, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 300, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 300, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="205.1" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 300, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="205.1" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 300, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="205.1" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 300, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="205.1" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 300, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="205.1" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 300, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="201.9" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 320, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="201.9" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 320, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 320, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 320, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 320, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 320, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 320, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 320, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 320, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="201.9" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 320, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="201.9" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 320, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="201.9" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 320, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="201.9" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 320, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="201.9" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 320, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="198.7" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 340, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="198.7" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 340, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 340, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 340, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 340, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 340, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 340, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 340, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 340, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="198.7" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 340, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="198.7" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 340, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="198.7" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 340, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="198.7" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 340, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="198.7" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 340, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="195.5" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 360, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="195.5" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 360, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 360, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 360, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 360, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 360, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 360, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 360, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 360, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="195.5" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 360, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="195.5" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 360, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="195.5" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 360, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="195.5" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 360, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="195.5" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 360, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="192.3" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 380, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="192.3" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 380, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 380, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 380, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 380, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 380, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 380, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 380, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 380, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="192.3" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 380, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="192.3" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 380, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="192.3" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 380, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="192.3" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 380, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="192.3" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 380, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="189.1" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 400, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="189.1" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 400, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 400, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 400, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 400, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 400, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 400, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 400, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 400, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="189.1" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 400, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="189.1" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 400, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="189.1" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 400, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="189.1" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 400, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="189.1" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 400, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="185.9" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 420, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="185.9" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 420, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 420, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 420, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 420, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 420, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 420, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 420, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 420, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="185.9" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 420, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="185.9" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 420, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="185.9" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 420, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="185.9" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 420, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="185.9" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 420, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="182.8" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 440, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="182.8" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 440, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 440, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 440, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 440, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 440, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 440, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 440, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 440, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="182.8" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 440, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="182.8" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 440, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="182.8" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 440, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="182.8" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 440, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="182.8" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 440, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="179.6" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 460, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="179.6" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 460, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 460, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 460, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 460, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 460, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 460, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 460, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 460, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="179.6" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 460, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="179.6" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 460, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="179.6" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 460, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="179.6" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 460, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="179.6" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 460, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="176.4" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 480, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="176.4" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 480, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 480, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 480, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 480, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 480, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 480, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 480, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 480, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="176.4" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 480, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="176.4" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 480, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="176.4" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 480, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="176.4" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 480, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="176.4" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 480, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="173.2" width="216.9" height="3.5" fill-opacity="1.000"><title>vertical separation (ft) 500, horizontal separation (NM) 0–3: 1</title></rect><rect class="cell seq" x="274.6" y="173.2" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 500, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 500, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 500, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 500, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 500, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 500, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 500, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 500, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="173.2" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 500, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="173.2" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 500, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="173.2" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 500, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="173.2" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 500, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="173.2" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 500, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="170.0" width="216.9" height="3.5" fill-opacity="0.938"><title>vertical separation (ft) 520, horizontal separation (NM) 0–3: 0.922</title></rect><rect class="cell seq" x="274.6" y="170.0" width="7.3" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 520, horizontal separation (NM) 3.1: 0.902</title></rect><rect class="cell seq" x="281.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 520, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 520, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 520, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 520, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 520, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 520, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 520, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="170.0" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 520, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="170.0" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 520, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="170.0" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 520, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="170.0" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 520, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="170.0" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 520, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="166.8" width="223.8" height="3.5" fill-opacity="0.875"><title>vertical separation (ft) 540, horizontal separation (NM) 0–3.1: 0.846</title></rect><rect class="cell seq" x="281.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.812"><title>vertical separation (ft) 540, horizontal separation (NM) 3.2: 0.81</title></rect><rect class="cell seq" x="288.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 540, horizontal separation (NM) 3.3: 0.722</title></rect><rect class="cell seq" x="295.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 540, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 540, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 540, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 540, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 540, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="166.8" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 540, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="166.8" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 540, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="166.8" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 540, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="166.8" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 540, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="166.8" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 540, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="163.7" width="237.8" height="3.5" fill-opacity="0.750"><title>vertical separation (ft) 560, horizontal separation (NM) 0–3.3: 0.722 to 0.774</title></rect><rect class="cell seq" x="295.5" y="163.7" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 560, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="163.7" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 560, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="163.7" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 560, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="163.7" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 560, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="163.7" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 560, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="163.7" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 560, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="163.7" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 560, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="163.7" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 560, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="163.7" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 560, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="163.7" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 560, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="160.5" width="237.8" height="3.5" fill-opacity="0.688"><title>vertical separation (ft) 580, horizontal separation (NM) 0–3.3: 0.706</title></rect><rect class="cell seq" x="295.5" y="160.5" width="7.3" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 580, horizontal separation (NM) 3.4: 0.64</title></rect><rect class="cell seq" x="302.5" y="160.5" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 580, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="160.5" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 580, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="160.5" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 580, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="160.5" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 580, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="160.5" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 580, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="160.5" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 580, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="160.5" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 580, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="160.5" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 580, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="160.5" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 580, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="157.3" width="244.8" height="3.5" fill-opacity="0.625"><title>vertical separation (ft) 600, horizontal separation (NM) 0–3.4: 0.64 to 0.64</title></rect><rect class="cell seq" x="302.5" y="157.3" width="7.3" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 600, horizontal separation (NM) 3.5: 0.562</title></rect><rect class="cell seq" x="309.5" y="157.3" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 600, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="157.3" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 600, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="157.3" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 600, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="157.3" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 600, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="157.3" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 600, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="157.3" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 600, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="157.3" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 600, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="157.3" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 600, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="154.1" width="251.8" height="3.5" fill-opacity="0.562"><title>vertical separation (ft) 620, horizontal separation (NM) 0–3.5: 0.562 to 0.578</title></rect><rect class="cell seq" x="309.5" y="154.1" width="7.3" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 620, horizontal separation (NM) 3.6: 0.49</title></rect><rect class="cell seq" x="316.5" y="154.1" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 620, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="154.1" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 620, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="154.1" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 620, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="154.1" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 620, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="154.1" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 620, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="154.1" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 620, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="154.1" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 620, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="150.9" width="258.8" height="3.5" fill-opacity="0.500"><title>vertical separation (ft) 640, horizontal separation (NM) 0–3.6: 0.49 to 0.518</title></rect><rect class="cell seq" x="316.5" y="150.9" width="7.3" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 640, horizontal separation (NM) 3.7: 0.422</title></rect><rect class="cell seq" x="323.5" y="150.9" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 640, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="150.9" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 640, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="150.9" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 640, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="150.9" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 640, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="150.9" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 640, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="150.9" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 640, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="147.7" width="265.8" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 660, horizontal separation (NM) 0–3.7: 0.422 to 0.462</title></rect><rect class="cell seq" x="323.5" y="147.7" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 660, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="147.7" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 660, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="147.7" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 660, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="147.7" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 660, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="147.7" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 660, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="147.7" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 660, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="144.6" width="265.8" height="3.5" fill-opacity="0.438"><title>vertical separation (ft) 680, horizontal separation (NM) 0–3.7: 0.41</title></rect><rect class="cell seq" x="323.5" y="144.6" width="7.3" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 680, horizontal separation (NM) 3.8: 0.36</title></rect><rect class="cell seq" x="330.5" y="144.6" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 680, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="144.6" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 680, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="144.6" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 680, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="144.6" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 680, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="144.6" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 680, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="141.4" width="272.8" height="3.5" fill-opacity="0.375"><title>vertical separation (ft) 700, horizontal separation (NM) 0–3.8: 0.36 to 0.36</title></rect><rect class="cell seq" x="330.5" y="141.4" width="7.3" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 700, horizontal separation (NM) 3.9: 0.302</title></rect><rect class="cell seq" x="337.4" y="141.4" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 700, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="141.4" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 700, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="141.4" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 700, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="141.4" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 700, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="138.2" width="279.7" height="3.5" fill-opacity="0.312"><title>vertical separation (ft) 720, horizontal separation (NM) 0–3.9: 0.302 to 0.314</title></rect><rect class="cell seq" x="337.4" y="138.2" width="7.3" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 720, horizontal separation (NM) 4: 0.25</title></rect><rect class="cell seq" x="344.4" y="138.2" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 720, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="138.2" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 720, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="138.2" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 720, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="135.0" width="286.7" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 740, horizontal separation (NM) 0–4: 0.25 to 0.27</title></rect><rect class="cell seq" x="344.4" y="135.0" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 740, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="135.0" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 740, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="135.0" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 740, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="131.8" width="286.7" height="3.5" fill-opacity="0.250"><title>vertical separation (ft) 760, horizontal separation (NM) 0–4: 0.23</title></rect><rect class="cell seq" x="344.4" y="131.8" width="14.3" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 760, horizontal separation (NM) 4.1–4.2: 0.16 to 0.202</title></rect><rect class="cell seq" x="358.4" y="131.8" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 760, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="131.8" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 760, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="128.6" width="300.7" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 780, horizontal separation (NM) 0–4.2: 0.16 to 0.194</title></rect><rect class="cell seq" x="358.4" y="128.6" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 780, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="128.6" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 780, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="125.4" width="300.7" height="3.5" fill-opacity="0.188"><title>vertical separation (ft) 800, horizontal separation (NM) 0–4.2: 0.16 to 0.16</title></rect><rect class="cell seq" x="358.4" y="125.4" width="7.3" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 800, horizontal separation (NM) 4.3: 0.123</title></rect><rect class="cell seq" x="365.4" y="125.4" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 800, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="122.3" width="307.7" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 820, horizontal separation (NM) 0–4.3: 0.123 to 0.13</title></rect><rect class="cell seq" x="365.4" y="122.3" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 820, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="119.1" width="307.7" height="3.5" fill-opacity="0.125"><title>vertical separation (ft) 840, horizontal separation (NM) 0–4.3: 0.102</title></rect><rect class="cell seq" x="365.4" y="119.1" width="42.2" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 840, horizontal separation (NM) 4.4–4.9: 0.0025 to 0.09</title></rect><rect class="cell seq" x="58.0" y="115.9" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 860, horizontal separation (NM) 0–4.9: 0.0025 to 0.0784</title></rect><rect class="cell seq" x="58.0" y="112.7" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 880, horizontal separation (NM) 0–4.9: 0.0025 to 0.0576</title></rect><rect class="cell seq" x="58.0" y="109.5" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 900, horizontal separation (NM) 0–4.9: 0.0025 to 0.04</title></rect><rect class="cell seq" x="58.0" y="106.3" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 920, horizontal separation (NM) 0–4.9: 0.0025 to 0.0256</title></rect><rect class="cell seq" x="58.0" y="103.2" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 940, horizontal separation (NM) 0–4.9: 0.0025 to 0.0144</title></rect><rect class="cell seq" x="58.0" y="100.0" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 960, horizontal separation (NM) 0–4.9: 0.0025 to 0.0064</title></rect><rect class="cell seq" x="58.0" y="96.8" width="349.6" height="3.5" fill-opacity="0.062"><title>vertical separation (ft) 980, horizontal separation (NM) 0–4.9: 0.0016</title></rect><line class="guide" x1="270.6" x2="270.6" y1="14" y2="256"/><text class="glabel" x="273.6" y="24">3 NM</text><line class="guide" x1="412.3" x2="412.3" y1="14" y2="256"/><text class="glabel" x="415.3" y="24">5 NM</text><line class="guide" x1="58" x2="554" y1="175.3" y2="175.3"/><text class="glabel" x="551" y="172.3" text-anchor="end">500 ft</text><line class="guide" x1="58" x2="554" y1="94.7" y2="94.7"/><text class="glabel" x="551" y="91.7" text-anchor="end">1000 ft</text><rect class="frame" x="58" y="14" width="496" height="242"/><text class="tick" x="58.0" y="270" text-anchor="middle">0</text><text class="tick" x="128.9" y="270" text-anchor="middle">1</text><text class="tick" x="199.7" y="270" text-anchor="middle">2</text><text class="tick" x="270.6" y="270" text-anchor="middle">3</text><text class="tick" x="341.4" y="270" text-anchor="middle">4</text><text class="tick" x="412.3" y="270" text-anchor="middle">5</text><text class="tick" x="483.1" y="270" text-anchor="middle">6</text><text class="tick" x="554.0" y="270" text-anchor="middle">7</text><text class="tick" x="52" y="259.0" text-anchor="end">0</text><text class="tick" x="52" y="178.3" text-anchor="end">500</text><text class="tick" x="52" y="97.7" text-anchor="end">1000</text><text class="tick" x="52" y="17.0" text-anchor="end">1500</text><text class="axis" x="306.0" y="294" text-anchor="middle">horizontal separation (NM)</text><text class="axis" transform="translate(14 135.0) rotate(-90)" text-anchor="middle">vertical separation (ft)</text><rect class="cell seq" x="576" y="14.0" width="14" height="30.6" fill-opacity="1.000"/><rect class="cell seq" x="576" y="44.2" width="14" height="30.6" fill-opacity="0.857"/><rect class="cell seq" x="576" y="74.5" width="14" height="30.6" fill-opacity="0.714"/><rect class="cell seq" x="576" y="104.8" width="14" height="30.6" fill-opacity="0.571"/><rect class="cell seq" x="576" y="135.0" width="14" height="30.6" fill-opacity="0.429"/><rect class="cell seq" x="576" y="165.2" width="14" height="30.6" fill-opacity="0.286"/><rect class="cell seq" x="576" y="195.5" width="14" height="30.6" fill-opacity="0.143"/><rect class="cell seq" x="576" y="225.8" width="14" height="30.6" fill-opacity="0.000"/><rect class="frame" x="576" y="14" width="14" height="242"/><text class="tick" x="594" y="22">1</text><text class="tick" x="594" y="256">0</text></svg></figure>
+
+<p>The function is <code>pair_severity</code> in <code>single-agent/utils/infringement_utils.py</code>; proximity is
+<code>pair_proximity</code> in the same file. In the evaluation records, a pair whose severity lies strictly
+between 0 and 1 is counted as an infringement (<code>warning_pairs</code> in
+<code>single-agent/analysis/evaluation_records.py</code>), and a pair that reaches 1 is a conflict.</p>
+<h2 id="realised-and-predicted">Realised and predicted<a class="headerlink" href="#realised-and-predicted" title="Permanent link">&para;</a></h2>
+<p>The grading is the same in both worlds, but the consequences are not.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>where it is read</th>
+<th>what it drives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>realised</strong></td>
+<td>events of the <a href="../environments/#live-and-predicted">live world</a>: things that happened</td>
+<td>termination of the episode, the conflict penalty in the reward, whether the episode is solved</td>
+</tr>
+<tr>
+<td><strong>predicted</strong></td>
+<td>events of the predicted world: the no-operation rollout from the current state</td>
+<td>the separation term of the reward shaping, the conflict features of the observation, one clearance mask, the release rule</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Realised.</strong> After every 45 s step the environment scans the events accumulated in the live world.
+If any pair has reached severity 1, a conflict has occurred. Nothing predicted can trigger this,
+however imminent.</p>
+<p><strong>Predicted.</strong> The no-operation rollout produces the events that will occur if no further
+clearance is given. They are used in four places:</p>
+<ul>
+<li><strong>Reward shaping.</strong> For each pair, the earliest predicted event is taken, with its severity and
+  its time-to-infringement. Pairs with at least one aircraft in the window contribute to the
+  separation potential, weighted by severity and discounted by how far in the future the event
+  lies. A clearance that removes a predicted infringement, or pushes it further away, is rewarded
+  at once; one that creates an infringement is penalised at once. The exact form is on
+  <a href="../objective/">Objective and reward</a>.</li>
+<li><strong>Observation.</strong> Each aircraft carries its largest predicted proximity and the time to its
+  earliest predicted event (<a href="../observations/">Observations</a>).</li>
+<li><strong>Masking.</strong> An aircraft that the forecast puts in a conflict within the next 2880 s cannot be
+  given <code>DO_NOTHING</code> (<a href="../actions/#masking">Actions and reselection</a>).</li>
+<li><strong>Release.</strong> A flight is released from the window only if it appears in no predicted proximity
+  event (<a href="../environments/#release">Episodes and temporal windowing</a>).</li>
+</ul>
+<p>Pricing predicted events is what gives the agent foresight. If only realised events counted, the
+agent would receive no signal about a developing encounter until the aircraft were already inside
+the infringement thresholds, which is too late to act.</p>
+<h2 id="what-ends-an-episode">What ends an episode<a class="headerlink" href="#what-ends-an-episode" title="Permanent link">&para;</a></h2>
+<p>A <strong>realised conflict</strong> ends the episode immediately. The step that causes it receives a fixed
+penalty (100 with the published settings), the episode is reported with
+<code>end_reason = "separation"</code>, and it is not solved. The penalty is larger than the largest
+improvement in landing reward available to the ten flights in the window, so no gain in
+punctuality can pay for a conflict (<a href="../objective/">Objective and reward</a>).</p>
+<p>An <strong>infringement that is not a conflict</strong> does not end the episode and does not by itself prevent
+it from being solved. It is charged through the severity while it is predicted, and it is counted
+in the evaluation records.</p>
+<p>An aircraft that <strong>leaves the airspace</strong> ends the episode in the same way and with the same
+penalty (<code>end_reason = "airspace_exit"</code>).</p>
+<p>The other ways an episode can end, every flight landed or the step limit reached, are described on
+<a href="../environments/#termination-and-truncation">Episodes and temporal windowing</a>.</p>
+<h2 id="constants">Constants<a class="headerlink" href="#constants" title="Permanent link">&para;</a></h2>
+<p>All in <code>Config</code> (<code>single-agent/config/config.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>constant</th>
+<th>value</th>
+<th>role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SEVERITY_SAFEZONE_NM</code></td>
+<td>5.0</td>
+<td>horizontal infringement threshold; severity reaches 0 here</td>
+</tr>
+<tr>
+<td><code>SEVERITY_CONFLICT_NM</code></td>
+<td>3.0</td>
+<td>horizontal conflict threshold; severity reaches 1 here</td>
+</tr>
+<tr>
+<td><code>VERTICAL_SAFEZONE_RADIUS_FT</code></td>
+<td>1000.0</td>
+<td>vertical infringement threshold</td>
+</tr>
+<tr>
+<td><code>VERTICAL_CONFLICT_RADIUS_FT</code></td>
+<td>500.0</td>
+<td>vertical conflict threshold</td>
+</tr>
+<tr>
+<td><code>SEVERITY_SHAPE_P</code></td>
+<td>2.0</td>
+<td>exponent applied to the combined ramp</td>
+</tr>
+<tr>
+<td><code>LOS_SEVERITY_THRESHOLD</code></td>
+<td>1.0</td>
+<td>severity at which a realised event is a conflict</td>
+</tr>
+<tr>
+<td><code>DETECTION_SAFEZONE_RADIUS_NM</code></td>
+<td>10.0</td>
+<td>outer edge of the proximity band used by the observation</td>
+</tr>
+<tr>
+<td><code>DETECTION_CONFLICT_RADIUS_NM</code></td>
+<td>3.0</td>
+<td>proximity reaches 1 here</td>
+</tr>
+<tr>
+<td><code>MISSION_SAFEZONE_RADIUS_NM</code></td>
+<td>5.0</td>
+<td>safe-zone radius passed to the simulator (with <code>TADA_GENERATOR=procedure</code>)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+    <nav class="tada-pager" aria-label="Previous and next page">
+      
+        <a class="tada-pager__btn tada-pager__btn--prev" href="../objective/" rel="prev">
+          <span class="tada-pager__arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg></span>
+          <span class="tada-pager__text">
+            <span class="tada-pager__dir">Previous · How it works</span>
+            <span class="tada-pager__title"><span class="tada-pager__glyph" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85.98 1.5 1.83 1.83V20H2v2h20v-2h-9V8.82c.85-.32 1.5-.97 1.82-1.82h3.13L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.17C14.4 3.8 13.27 3 12 3m0 2a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-6.5 5.25L7 14H4zm13 0L20 14h-3z"/></svg></span>Objective and reward</span>
+          </span>
+        </a>
+      
+      
+        <a class="tada-pager__btn tada-pager__btn--next" href="../search/" rel="next">
+          <span class="tada-pager__text">
+            <span class="tada-pager__dir">Next · How it works</span>
+            <span class="tada-pager__title"><span class="tada-pager__glyph" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 13H7v5h5v2H5V10h2v1h5zM8 4v2H4V4zm2-2H2v6h8zm10 9v2h-4v-2zm2-2h-8v6h8zm-2 9v2h-4v-2zm2-2h-8v6h8z"/></svg></span>Rollout search</span>
+          </span>
+          <span class="tada-pager__arrow" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span>
+        </a>
+      
+    </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Research software and models, shared as is. Developed within TADA (SESAR 3 JU, grant agreement No 101166972).
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.path", "navigation.top", "navigation.tracking", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/tada.js"></script>
+      
+        <script src="../../javascripts/key-request.js"></script>
+      
+        <script src="../../javascripts/lab-engine.js"></script>
+      
+        <script src="../../javascripts/lab.js"></script>
+      
+    
+  </body>
+</html>
